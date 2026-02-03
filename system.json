@@ -1,16 +1,35 @@
 {
   "id": "mecha-hack",
   "title": "Mecha Hack",
-  "description": "A roll-under d20 mecha combat system.",
+  "description": "A roll-under d20 mecha combat system for Foundry VTT v13.",
   "version": "1.0.0",
   "compatibility": {
     "minimum": "13",
     "verified": "13"
   },
-  "authors": [{ "name": "Mecha Hack Developer" }],
+  "authors": [
+    {
+      "name": "Mecha Hack Developer",
+      "discord": "",
+      "url": ""
+    }
+  ],
   "esmodules": ["mecha-hack.mjs"],
   "styles": ["mecha-hack.css"],
-  "languages": [{ "lang": "en", "name": "English", "path": "lang/en.json" }],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
   "primaryTokenAttribute": "hitPoints",
-  "secondaryTokenAttribute": "armorPoints"
+  "secondaryTokenAttribute": "armorPoints",
+  "url": "https://github.com/rob8341/mecha-hack",
+  "manifest": "https://github.com/rob8341/mecha-hack/releases/latest/download/system.json",
+  "download": "https://github.com/rob8341/mecha-hack/releases/latest/download/mecha-hack.zip",
+  "license": "MIT",
+  "readme": "https://github.com/rob8341/mecha-hack/blob/main/README.md",
+  "bugs": "https://github.com/rob8341/mecha-hack/issues",
+  "changelog": "https://github.com/rob8341/mecha-hack/blob/main/CHANGELOG.md"
 }

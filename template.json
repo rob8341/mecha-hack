@@ -6,6 +6,7 @@
       "pilotRecord": "",
       "chassis": "",
       "level": 1,
+      "credits": "",
       "stats": {
         "power": { "value": 10 },
         "mobility": { "value": 10 },

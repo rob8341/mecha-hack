@@ -483,6 +483,32 @@
   margin-bottom: 12px;
 }
 
+/* Credits field on Items tab */
+.mecha-hack .credits-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  background: var(--mecha-bg-light);
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--mecha-border);
+}
+
+.mecha-hack .credits-field label {
+  font-weight: bold;
+  color: var(--mecha-yellow);
+  white-space: nowrap;
+}
+
+.mecha-hack .credits-field input {
+  width: 120px;
+  text-align: right;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: var(--mecha-yellow);
+}
+
 /* Items */
 .mecha-hack .item-section {
   margin-bottom: 20px;

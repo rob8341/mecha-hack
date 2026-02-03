@@ -54,7 +54,8 @@ class MechaHackActor extends Actor {
       }
     }
     
-    let success = modifiedRoll <= stat.value;
+    // Success if roll is LOWER than target (fail on equal or higher)
+    let success = modifiedRoll < stat.value;
     if (isCritSuccess) success = true;
     if (isCritFailure) success = false;
     
@@ -504,7 +505,7 @@ class MechaHackActorSheet extends ActorSheet {
       classes: ["mecha-hack", "sheet", "actor"],
       width: 720,
       height: 920,
-      resizable: false,
+      resizable: true,
       scrollY: [".sheet-body"],
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "main" }]
     });
