@@ -1,0 +1,43 @@
+{
+  "Actor": {
+    "types": ["mecha", "enemy"],
+    "mecha": {
+      "pilot": "",
+      "pilotRecord": "",
+      "chassis": "",
+      "level": 1,
+      "stats": {
+        "power": { "value": 10 },
+        "mobility": { "value": 10 },
+        "system": { "value": 10 },
+        "presence": { "value": 10 }
+      },
+      "armorPoints": { "value": 5, "max": 5 },
+      "hitPoints": { "value": 10, "max": 10 },
+      "dice": { "hit": "d8", "damage": "d6", "reactor": "d6" },
+      "notes": ""
+    },
+    "enemy": {
+      "flavourText": "",
+      "hitDice": "1d8",
+      "hitPoints": { "value": 10, "max": 10 },
+      "armorPoints": { "value": 0, "max": 0 },
+      "boss": false
+    }
+  },
+  "Item": {
+    "types": ["weapon", "module", "equipment", "armor", "consumable", "pilotAbility", "chassisAbility", "enemyTrait", "enemyAttack", "enemyRechargeAttack", "bossAttack", "bossRechargeAttack"],
+    "weapon": { "description": "", "range": "melee", "hands": "oneHanded", "qualities": "", "cost": "" },
+    "module": { "description": "", "moduleType": "utility" },
+    "equipment": { "description": "", "cost": "" },
+    "armor": { "description": "", "armorBonus": 0, "cost": "" },
+    "consumable": { "description": "", "uses": 1, "cost": "" },
+    "pilotAbility": { "description": "" },
+    "chassisAbility": { "description": "" },
+    "enemyTrait": { "description": "" },
+    "enemyAttack": { "description": "", "damage": "1d6", "defendStat": "mobility", "targets": 1, "attackRange": "close" },
+    "enemyRechargeAttack": { "description": "", "damage": "1d6", "defendStat": "mobility", "targets": 1, "attackRange": "close", "ready": false },
+    "bossAttack": { "description": "", "damage": "1d6", "defendStat": "mobility", "targets": 1, "attackRange": "close" },
+    "bossRechargeAttack": { "description": "", "damage": "1d6", "defendStat": "mobility", "targets": 1, "attackRange": "close", "ready": false }
+  }
+}

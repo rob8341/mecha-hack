@@ -1,0 +1,1991 @@
+/* Mecha Hack - Foundry VTT v13 System Styles */
+
+:root {
+  --mecha-bg: #1a1a2e;
+  --mecha-bg-light: #16213e;
+  --mecha-accent: #0f3460;
+  --mecha-cyan: #00d4ff;
+  --mecha-orange: #ff6b35;
+  --mecha-red: #e94560;
+  --mecha-yellow: #f0c040;
+  --mecha-purple: #a855f7;
+  --mecha-green: #22c55e;
+  --mecha-text: #e8e8e8;
+  --mecha-text-dim: #888;
+  --mecha-border: #333;
+}
+
+/* Sheet Base */
+.mecha-hack.sheet {
+  background: var(--mecha-bg);
+  color: var(--mecha-text);
+  border: 2px solid var(--mecha-cyan);
+}
+
+.mecha-hack.sheet input,
+.mecha-hack.sheet select,
+.mecha-hack.sheet textarea {
+  background: var(--mecha-bg-light);
+  color: var(--mecha-text);
+  border: 1px solid var(--mecha-border);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.mecha-hack.sheet input:focus,
+.mecha-hack.sheet select:focus,
+.mecha-hack.sheet textarea:focus {
+  border-color: var(--mecha-cyan);
+  outline: none;
+  box-shadow: 0 0 4px var(--mecha-cyan);
+}
+
+.mecha-hack.sheet input[type="number"] {
+  width: 60px;
+  text-align: center;
+}
+
+/* Sheet Header */
+.mecha-hack .sheet-header {
+  display: flex;
+  gap: 16px;
+  padding: 12px;
+  background: var(--mecha-bg-light);
+  border-bottom: 2px solid var(--mecha-cyan);
+}
+
+.mecha-hack .profile-img {
+  width: 120px;
+  height: 120px;
+  min-width: 120px;
+  min-height: 120px;
+  border: 2px solid var(--mecha-cyan);
+  border-radius: 4px;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.mecha-hack .header-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mecha-hack .callsign-row {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+  margin-bottom: 8px;
+}
+
+.mecha-hack .callsign-row > label {
+  font-weight: bold;
+  color: var(--mecha-text-dim);
+  white-space: nowrap;
+  min-width: 60px;
+}
+
+.mecha-hack .callsign-input {
+  font-size: 1.6em;
+  font-weight: bold;
+  flex: 1;
+  background: transparent !important;
+  border: none !important;
+  color: var(--mecha-cyan);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.mecha-hack .callsign-input:focus {
+  box-shadow: none !important;
+}
+
+/* Level field in top right */
+.mecha-hack .level-field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  background: var(--mecha-accent);
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--mecha-cyan);
+}
+
+.mecha-hack .level-field label {
+  font-weight: bold;
+  color: var(--mecha-cyan);
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.mecha-hack .level-field input {
+  width: 45px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.mecha-hack .field-row {
+  display: flex;
+  gap: 16px;
+}
+
+.mecha-hack .field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mecha-hack .field label {
+  font-weight: bold;
+  color: var(--mecha-text-dim);
+  white-space: nowrap;
+}
+
+.mecha-hack .field input {
+  flex: 1;
+  min-width: 100px;
+}
+
+/* Pilot Record field spans full width */
+.mecha-hack .pilot-record-field {
+  flex: 1;
+}
+
+.mecha-hack .pilot-record-field input {
+  width: 100%;
+}
+
+/* Tabs */
+.mecha-hack .sheet-tabs {
+  display: flex;
+  background: var(--mecha-accent);
+  border-bottom: 2px solid var(--mecha-cyan);
+}
+
+.mecha-hack .sheet-tabs .item {
+  padding: 8px 16px;
+  color: var(--mecha-text-dim);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+}
+
+.mecha-hack .sheet-tabs .item:hover {
+  color: var(--mecha-text);
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.mecha-hack .sheet-tabs .item.active {
+  color: var(--mecha-cyan);
+  border-bottom-color: var(--mecha-cyan);
+}
+
+/* Sheet Body */
+.mecha-hack .sheet-body {
+  padding: 12px;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Prevent double scrollbars */
+.mecha-hack.sheet {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.mecha-hack.sheet .window-content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.mecha-hack.sheet form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.mecha-hack .sheet-header {
+  flex-shrink: 0;
+}
+
+.mecha-hack .sheet-tabs {
+  flex-shrink: 0;
+}
+
+.mecha-hack .sheet-body .tab {
+  display: none;
+}
+
+.mecha-hack .sheet-body .tab.active {
+  display: block;
+  overflow: visible;
+}
+
+.mecha-hack .section {
+  margin-bottom: 16px;
+}
+
+.mecha-hack .section.no-header {
+  margin-bottom: 12px;
+}
+
+.mecha-hack h2 {
+  color: var(--mecha-cyan);
+  border-bottom: 1px solid var(--mecha-border);
+  padding-bottom: 6px;
+  margin: 0 0 12px 0;
+  font-size: 1.1em;
+}
+
+.mecha-hack h3 {
+  color: var(--mecha-text);
+  margin: 0;
+  font-size: 1em;
+}
+
+/* Stats Grid */
+.mecha-hack .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.mecha-hack .stat-block {
+  background: var(--mecha-bg-light);
+  border: 1px solid var(--mecha-border);
+  border-radius: 6px;
+  padding: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.mecha-hack .stat-label {
+  font-weight: bold;
+  color: var(--mecha-cyan);
+  text-transform: uppercase;
+  font-size: 0.85em;
+}
+
+.mecha-hack .stat-block input {
+  font-size: 1.5em;
+  font-weight: bold;
+  width: 70px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.mecha-hack .stat-roll {
+  background: var(--mecha-accent);
+  color: var(--mecha-cyan);
+  border: 1px solid var(--mecha-cyan);
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mecha-hack .stat-roll:hover {
+  background: var(--mecha-cyan);
+  color: var(--mecha-bg);
+}
+
+/* Health Grid */
+.mecha-hack .health-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.mecha-hack .health-bar {
+  background: var(--mecha-bg-light);
+  border: 1px solid var(--mecha-border);
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.mecha-hack .health-bar label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.mecha-hack .health-bar.armor label {
+  color: var(--mecha-cyan);
+}
+
+.mecha-hack .health-bar.hp label {
+  color: var(--mecha-orange);
+}
+
+/* Restore buttons */
+.mecha-hack .health-bar label a.restore-hp,
+.mecha-hack .health-bar label a.restore-ap {
+  cursor: pointer;
+  margin-right: 4px;
+  transition: all 0.2s;
+}
+
+.mecha-hack .health-bar label a.restore-hp {
+  color: var(--mecha-orange);
+}
+
+.mecha-hack .health-bar label a.restore-hp:hover {
+  color: #ff8855;
+  text-shadow: 0 0 8px var(--mecha-orange);
+}
+
+.mecha-hack .health-bar label a.restore-ap {
+  color: var(--mecha-cyan);
+}
+
+.mecha-hack .health-bar label a.restore-ap:hover {
+  color: #33ddff;
+  text-shadow: 0 0 8px var(--mecha-cyan);
+}
+
+.mecha-hack .health-inputs {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.mecha-hack .health-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.mecha-hack .health-label {
+  font-size: 0.75em;
+  color: var(--mecha-text-dim);
+  text-transform: uppercase;
+}
+
+.mecha-hack .health-divider {
+  font-size: 1.2em;
+  color: var(--mecha-text-dim);
+  padding-bottom: 4px;
+}
+
+.mecha-hack .health-inputs input {
+  width: 50px;
+}
+
+.mecha-hack .bar {
+  background: var(--mecha-bg);
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--mecha-border);
+}
+
+.mecha-hack .health-bar.armor .bar .fill {
+  background: linear-gradient(90deg, var(--mecha-cyan), #00a0cc);
+  height: 100%;
+  transition: width 0.3s;
+}
+
+.mecha-hack .health-bar.hp .bar .fill {
+  background: linear-gradient(90deg, var(--mecha-orange), #cc5020);
+  height: 100%;
+  transition: width 0.3s;
+}
+
+/* Dice Grid */
+.mecha-hack .dice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.mecha-hack .die-block {
+  background: var(--mecha-bg-light);
+  border: 1px solid var(--mecha-border);
+  border-radius: 6px;
+  padding: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mecha-hack .die-block label {
+  font-weight: bold;
+}
+
+.mecha-hack .die-block.hit label { color: var(--mecha-red); }
+.mecha-hack .die-block.damage label { color: var(--mecha-yellow); }
+.mecha-hack .die-block.reactor label { color: var(--mecha-purple); }
+
+.mecha-hack .die-block select {
+  width: 100%;
+  text-align: center;
+  font-size: 1.1em;
+  background: var(--mecha-accent);
+  color: var(--mecha-text);
+  border: 1px solid var(--mecha-border);
+}
+
+.mecha-hack .die-block select option {
+  background: var(--mecha-bg-light);
+  color: var(--mecha-text);
+}
+
+.mecha-hack .die-roll {
+  background: var(--mecha-accent);
+  color: var(--mecha-text);
+  border: 1px solid var(--mecha-border);
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mecha-hack .die-block.hit .die-roll:hover {
+  background: var(--mecha-red);
+  border-color: var(--mecha-red);
+}
+
+.mecha-hack .die-block.damage .die-roll:hover {
+  background: var(--mecha-yellow);
+  border-color: var(--mecha-yellow);
+  color: var(--mecha-bg);
+}
+
+.mecha-hack .die-block.reactor .die-roll:hover {
+  background: var(--mecha-purple);
+  border-color: var(--mecha-purple);
+}
+
+/* Abilities Section */
+.mecha-hack .abilities-section {
+  margin-top: 8px;
+}
+
+.mecha-hack .abilities-section .item-section {
+  margin-bottom: 12px;
+}
+
+/* Items */
+.mecha-hack .item-section {
+  margin-bottom: 20px;
+}
+
+.mecha-hack .item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--mecha-accent);
+  padding: 8px 12px;
+  border-radius: 4px 4px 0 0;
+  border: 1px solid var(--mecha-border);
+  border-bottom: none;
+}
+
+.mecha-hack .item-create {
+  color: var(--mecha-cyan);
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.mecha-hack .item-create:hover {
+  color: var(--mecha-text);
+}
+
+.mecha-hack .item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--mecha-border);
+  border-radius: 0 0 4px 4px;
+  overflow: visible;
+}
+
+.mecha-hack .item-list .item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--mecha-bg-light);
+  border-bottom: 1px solid var(--mecha-border);
+}
+
+.mecha-hack .item-list .item:last-child {
+  border-bottom: none;
+}
+
+.mecha-hack .item-list .item img {
+  border: 1px solid var(--mecha-border);
+  border-radius: 2px;
+}
+
+.mecha-hack .item-list .item .name {
+  flex: 1;
+  font-weight: bold;
+}
+
+.mecha-hack .item-list .item .detail {
+  color: var(--mecha-text-dim);
+  font-size: 0.85em;
+  text-transform: uppercase;
+  background: var(--mecha-bg);
+  padding: 2px 8px;
+  border-radius: 3px;
+  border: 1px solid var(--mecha-border);
+}
+
+/* Detail badges with colors */
+.mecha-hack .item-list .item .detail.tags {
+  color: var(--mecha-yellow);
+  border-color: var(--mecha-yellow);
+  background: rgba(240, 192, 64, 0.1);
+}
+
+.mecha-hack .item-list .item .detail.reactor-cost {
+  color: var(--mecha-purple);
+  border-color: var(--mecha-purple);
+  background: rgba(168, 85, 247, 0.1);
+}
+
+/* Module type badges */
+.mecha-hack .item-list .item .detail.module-type {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.mecha-hack .item-list .item .detail.module-type-utility {
+  color: var(--mecha-cyan);
+  border-color: var(--mecha-cyan);
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.mecha-hack .item-list .item .detail.module-type-offensive {
+  color: var(--mecha-red);
+  border-color: var(--mecha-red);
+  background: rgba(233, 69, 96, 0.1);
+}
+
+.mecha-hack .item-list .item .detail.module-type-defensive {
+  color: var(--mecha-green);
+  border-color: var(--mecha-green);
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.mecha-hack .item-list .item .detail.quantity {
+  color: var(--mecha-cyan);
+  border-color: var(--mecha-cyan);
+  background: rgba(0, 212, 255, 0.1);
+}
+
+/* Weapon range badges */
+.mecha-hack .item-list .item .detail.weapon-range {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.mecha-hack .item-list .item .detail.weapon-range-melee {
+  color: var(--mecha-red);
+  border-color: var(--mecha-red);
+  background: rgba(233, 69, 96, 0.1);
+}
+
+.mecha-hack .item-list .item .detail.weapon-range-ranged {
+  color: var(--mecha-cyan);
+  border-color: var(--mecha-cyan);
+  background: rgba(0, 212, 255, 0.1);
+}
+
+/* Weapon hands badge */
+.mecha-hack .item-list .item .detail.weapon-hands {
+  color: var(--mecha-text-dim);
+  background: var(--mecha-bg);
+}
+
+.mecha-hack .item-list .item .controls {
+  display: flex;
+  gap: 8px;
+}
+
+.mecha-hack .item-list .item .controls a {
+  color: var(--mecha-text-dim);
+  cursor: pointer;
+}
+
+.mecha-hack .item-list .item .controls a:hover {
+  color: var(--mecha-cyan);
+}
+
+.mecha-hack .item-list .item .controls .item-delete:hover,
+.mecha-hack .item-list .item .controls .item-delete-confirm:hover {
+  color: var(--mecha-red);
+}
+
+/* Empty item list state */
+.mecha-hack .item-list .item-empty {
+  padding: 12px 16px;
+  text-align: center;
+  color: var(--mecha-text-dim);
+  font-style: italic;
+  background: var(--mecha-bg-light);
+  border-bottom: 1px solid var(--mecha-border);
+}
+
+.mecha-hack .item-list .item-empty:last-child {
+  border-bottom: none;
+}
+
+.mecha-hack .item-list .item-empty.ability-slot {
+  padding: 10px 16px;
+  color: var(--mecha-text-dim);
+  opacity: 0.6;
+}
+
+/* Empty ability slot styling (visible) */
+.mecha-hack .item-list .ability-slot-empty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--mecha-bg-light);
+  border-bottom: 1px solid var(--mecha-border);
+  opacity: 0.5;
+}
+
+.mecha-hack .item-list .ability-slot-empty:last-child {
+  border-bottom: none;
+}
+
+.mecha-hack .item-list .ability-slot-empty .slot-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--mecha-bg);
+  border: 1px dashed var(--mecha-border);
+  border-radius: 2px;
+  font-size: 0.85em;
+  color: var(--mecha-text-dim);
+}
+
+.mecha-hack .item-list .ability-slot-empty .empty-name {
+  flex: 1;
+  font-style: italic;
+  color: var(--mecha-text-dim);
+}
+
+/* Item Sheet */
+.mecha-hack.item .sheet-header {
+  padding: 12px;
+}
+
+.mecha-hack.item .sheet-header .header-fields {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.mecha-hack.item .item-type {
+  text-transform: uppercase;
+  color: var(--mecha-cyan);
+  font-size: 0.85em;
+  font-weight: bold;
+  padding: 4px 10px;
+  background: var(--mecha-accent);
+  border-radius: 4px;
+  border: 1px solid var(--mecha-cyan);
+}
+
+.mecha-hack.item .sheet-body {
+  padding: 12px;
+  height: auto;
+}
+
+.mecha-hack .form-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.mecha-hack .form-group label {
+  min-width: 100px;
+  font-weight: bold;
+  color: var(--mecha-text-dim);
+}
+
+.mecha-hack .form-group input,
+.mecha-hack .form-group select {
+  flex: 1;
+}
+
+/* Module type dropdown - same style as die roll dropdowns */
+.mecha-hack .form-group select.module-type-select {
+  background: var(--mecha-accent);
+  color: var(--mecha-text);
+  border: 1px solid var(--mecha-border);
+  font-size: 1.1em;
+  text-align: center;
+}
+
+.mecha-hack .form-group select.module-type-select option {
+  background: var(--mecha-bg-light);
+  color: var(--mecha-text);
+}
+
+/* Weapon dropdowns - same style as die roll dropdowns */
+.mecha-hack .form-group select.weapon-select {
+  background: var(--mecha-accent);
+  color: var(--mecha-text);
+  border: 1px solid var(--mecha-border);
+  font-size: 1.1em;
+  text-align: center;
+}
+
+.mecha-hack .form-group select.weapon-select option {
+  background: var(--mecha-bg-light);
+  color: var(--mecha-text);
+}
+
+/* Attack dropdowns - same style as die roll dropdowns */
+.mecha-hack .form-group select.attack-select {
+  background: var(--mecha-accent);
+  color: var(--mecha-text);
+  border: 1px solid var(--mecha-border);
+  font-size: 1.1em;
+  text-align: center;
+}
+
+.mecha-hack .form-group select.attack-select option {
+  background: var(--mecha-bg-light);
+  color: var(--mecha-text);
+}
+
+.mecha-hack .form-group.stacked {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.mecha-hack .form-group.stacked label {
+  margin-bottom: 8px;
+}
+
+.mecha-hack .form-group.stacked textarea {
+  min-height: 80px;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+/* Ability editor in item sheet - make it taller */
+.mecha-hack .form-group.ability-editor textarea {
+  min-height: 300px;
+}
+
+.mecha-hack .form-group.ability-editor label {
+  font-size: 1.1em;
+  color: var(--mecha-cyan);
+}
+
+/* Notes Tab */
+.mecha-hack .notes-section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.mecha-hack .notes-field {
+  flex: 1;
+  min-height: 500px;
+  width: 100%;
+  background: var(--mecha-bg-light);
+  border: 1px solid var(--mecha-border);
+  border-radius: 6px;
+  color: var(--mecha-text);
+  padding: 12px;
+  font-family: inherit;
+  font-size: 0.95em;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.mecha-hack .notes-field:focus {
+  border-color: var(--mecha-cyan);
+  outline: none;
+  box-shadow: 0 0 4px var(--mecha-cyan);
+}
+
+.mecha-hack .notes-field::placeholder {
+  color: var(--mecha-text-dim);
+}
+
+/* ============================================
+   CHAT ROLL MESSAGES
+   ============================================ */
+
+.mecha-roll {
+  padding: 10px 12px;
+  border-radius: 4px;
+  background: var(--mecha-bg-light);
+  border-left: 3px solid var(--mecha-cyan);
+  font-family: inherit;
+}
+
+.mecha-roll strong {
+  color: var(--mecha-cyan);
+}
+
+/* Success state */
+.mecha-roll.success {
+  border-left-color: var(--mecha-green);
+}
+
+.mecha-roll.success .result {
+  color: var(--mecha-green);
+  font-weight: bold;
+}
+
+/* Failure state */
+.mecha-roll.failure {
+  border-left-color: var(--mecha-red);
+}
+
+.mecha-roll.failure .result {
+  color: var(--mecha-red);
+  font-weight: bold;
+}
+
+/* Critical Success */
+.mecha-roll.critical-success {
+  border-left-color: gold;
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.15), var(--mecha-bg-light));
+}
+
+.mecha-roll.critical-success .result {
+  color: gold;
+  font-weight: bold;
+  text-shadow: 0 0 8px gold;
+}
+
+/* Critical Failure */
+.mecha-roll.critical-failure {
+  border-left-color: #8b0000;
+  background: linear-gradient(90deg, rgba(139, 0, 0, 0.2), var(--mecha-bg-light));
+}
+
+.mecha-roll.critical-failure .result {
+  color: #ff4444;
+  font-weight: bold;
+  text-shadow: 0 0 8px #8b0000;
+}
+
+/* Weapon roll styling */
+.mecha-roll.weapon-roll {
+  border-left-color: var(--mecha-yellow);
+}
+
+.mecha-roll.weapon-roll strong {
+  color: var(--mecha-yellow);
+}
+
+/* Module roll styling */
+.mecha-roll.module-roll {
+  border-left-color: var(--mecha-purple);
+}
+
+.mecha-roll.module-roll strong {
+  color: var(--mecha-purple);
+}
+
+/* Module type in chat - matches item tab colors */
+.mecha-roll .module-type {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 0.85em;
+  text-transform: capitalize;
+  font-weight: bold;
+  margin-left: 6px;
+}
+
+.mecha-roll .module-type.module-type-utility {
+  color: var(--mecha-cyan);
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid var(--mecha-cyan);
+}
+
+.mecha-roll .module-type.module-type-offensive {
+  color: var(--mecha-red);
+  background: rgba(233, 69, 96, 0.1);
+  border: 1px solid var(--mecha-red);
+}
+
+.mecha-roll .module-type.module-type-defensive {
+  color: var(--mecha-green);
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid var(--mecha-green);
+}
+
+/* Equipment roll styling */
+.mecha-roll.equipment-roll {
+  border-left-color: var(--mecha-cyan);
+}
+
+.mecha-roll.equipment-roll strong {
+  color: var(--mecha-cyan);
+}
+
+/* Pilot Ability roll styling */
+.mecha-roll.pilot-ability-roll {
+  border-left-color: var(--mecha-orange);
+}
+
+.mecha-roll.pilot-ability-roll strong {
+  color: var(--mecha-orange);
+}
+
+/* Chassis Ability roll styling */
+.mecha-roll.chassis-ability-roll {
+  border-left-color: var(--mecha-cyan);
+}
+
+.mecha-roll.chassis-ability-roll strong {
+  color: var(--mecha-cyan);
+}
+
+/* Reactor states */
+.reactor-degrade {
+  color: var(--mecha-purple);
+  font-weight: bold;
+  display: block;
+  margin-top: 6px;
+  padding: 6px 8px;
+  background: rgba(168, 85, 247, 0.15);
+  border-radius: 4px;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.reactor-steady {
+  color: var(--mecha-green);
+  font-weight: bold;
+  display: block;
+  margin-top: 6px;
+}
+
+.reactor-overheat {
+  color: #ff4444;
+  font-weight: bold;
+  display: block;
+  margin-top: 6px;
+  padding: 6px 8px;
+  background: rgba(255, 68, 68, 0.2);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 68, 68, 0.4);
+  animation: overheat-pulse 0.5s ease-in-out 3;
+}
+
+@keyframes overheat-pulse {
+  0%, 100% { background: rgba(255, 68, 68, 0.2); }
+  50% { background: rgba(255, 68, 68, 0.4); }
+}
+
+/* Heal roll styling */
+.mecha-roll.heal-roll {
+  border-left-color: var(--mecha-green);
+}
+
+.mecha-roll.heal-roll strong {
+  color: var(--mecha-green);
+}
+
+.heal-result {
+  color: var(--mecha-green);
+  font-weight: bold;
+  display: block;
+  margin-top: 6px;
+  padding: 6px 8px;
+  background: rgba(34, 197, 94, 0.15);
+  border-radius: 4px;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* Damage roll styling */
+.mecha-roll.damage-roll {
+  border-left-color: var(--mecha-yellow);
+}
+
+.mecha-roll.damage-roll strong {
+  color: var(--mecha-yellow);
+}
+
+.mecha-roll.damage-roll .damage-total {
+  display: block;
+  margin-top: 4px;
+}
+
+/* Item details in chat */
+.mecha-roll .item-tags {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 8px;
+  background: rgba(240, 192, 64, 0.15);
+  border: 1px solid var(--mecha-yellow);
+  border-radius: 3px;
+  color: var(--mecha-yellow);
+  font-size: 0.85em;
+  text-transform: uppercase;
+}
+
+.mecha-roll .item-range {
+  color: var(--mecha-text-dim);
+  font-size: 0.9em;
+}
+
+.mecha-roll .weapon-detail {
+  display: block;
+  margin-top: 4px;
+  color: var(--mecha-text-dim);
+}
+
+.mecha-roll .weapon-detail .weapon-range-melee {
+  color: var(--mecha-red);
+  font-weight: bold;
+}
+
+.mecha-roll .weapon-detail .weapon-range-ranged {
+  color: var(--mecha-cyan);
+  font-weight: bold;
+}
+
+.mecha-roll .item-qualities {
+  display: block;
+  margin-top: 4px;
+  font-style: italic;
+  color: var(--mecha-yellow);
+}
+
+.mecha-roll .item-effect {
+  display: block;
+  margin-top: 6px;
+  padding: 6px 8px;
+  background: var(--mecha-bg);
+  border-radius: 4px;
+  color: var(--mecha-text);
+  font-style: italic;
+  border-left: 2px solid var(--mecha-text-dim);
+}
+
+.mecha-roll .item-description {
+  display: block;
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: var(--mecha-bg);
+  border-radius: 4px;
+  color: var(--mecha-text);
+  border-left: 2px solid currentColor;
+  line-height: 1.4;
+}
+
+/* ============================================
+   FOUNDRY CHAT MESSAGE STYLING
+   Only style the chat messages/cards, not the
+   sidebar background
+   ============================================ */
+
+/* Chat message cards - consistent with actor sheet */
+#chat-log .chat-message {
+  background: var(--mecha-bg-light, #16213e);
+  color: var(--mecha-text, #e8e8e8);
+  border: 1px solid var(--mecha-border, #333);
+  border-left: 3px solid var(--mecha-cyan, #00d4ff);
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+#chat-log .chat-message .message-header {
+  color: var(--mecha-text-dim, #888);
+  border-bottom: 1px solid var(--mecha-border, #333);
+  background: var(--mecha-bg, #1a1a2e);
+  padding: 6px 8px;
+}
+
+#chat-log .chat-message .message-header .message-sender {
+  color: var(--mecha-cyan, #00d4ff);
+  font-weight: bold;
+}
+
+#chat-log .chat-message .message-header .message-metadata {
+  color: var(--mecha-text-dim, #888);
+}
+
+#chat-log .chat-message .message-content {
+  color: var(--mecha-text, #e8e8e8);
+  padding: 8px;
+  background: var(--mecha-bg-light, #16213e);
+}
+
+/* Dice roll styling in chat */
+#chat-log .chat-message .dice-roll {
+  background: var(--mecha-bg, #1a1a2e);
+  border: 1px solid var(--mecha-border, #333);
+  border-radius: 4px;
+  margin-top: 6px;
+}
+
+#chat-log .chat-message .dice-roll .dice-formula {
+  background: var(--mecha-accent, #0f3460);
+  color: var(--mecha-cyan, #00d4ff);
+  border-bottom: 1px solid var(--mecha-border, #333);
+  padding: 6px 10px;
+  font-weight: bold;
+}
+
+#chat-log .chat-message .dice-roll .dice-total {
+  color: var(--mecha-text, #e8e8e8);
+  font-weight: bold;
+  font-size: 1.2em;
+  padding: 8px 10px;
+  background: var(--mecha-bg-light, #16213e);
+}
+
+#chat-log .chat-message .dice-roll .dice-total.success {
+  color: var(--mecha-green, #22c55e);
+}
+
+#chat-log .chat-message .dice-roll .dice-total.failure {
+  color: var(--mecha-red, #e94560);
+}
+
+/* Dice tooltip styling */
+#chat-log .chat-message .dice-roll .dice-tooltip {
+  background: var(--mecha-bg, #1a1a2e);
+  color: var(--mecha-text, #e8e8e8);
+  border: 1px solid var(--mecha-cyan, #00d4ff);
+  border-radius: 4px;
+}
+
+#chat-log .chat-message .dice-roll .dice-tooltip .part-header {
+  background: var(--mecha-accent, #0f3460);
+  color: var(--mecha-cyan, #00d4ff);
+  border-bottom: 1px solid var(--mecha-border, #333);
+  padding: 4px 8px;
+}
+
+#chat-log .chat-message .dice-roll .dice-tooltip .dice-rolls {
+  padding: 6px;
+  background: var(--mecha-bg, #1a1a2e);
+}
+
+#chat-log .chat-message .dice-roll .dice-tooltip .dice-rolls li {
+  background: var(--mecha-bg-light, #16213e);
+  border: 1px solid var(--mecha-border, #333);
+  color: var(--mecha-text, #e8e8e8);
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+
+#chat-log .chat-message .dice-roll .dice-tooltip .dice-rolls li.max {
+  color: var(--mecha-green, #22c55e);
+  border-color: var(--mecha-green, #22c55e);
+  background: rgba(34, 197, 94, 0.1);
+}
+
+#chat-log .chat-message .dice-roll .dice-tooltip .dice-rolls li.min {
+  color: var(--mecha-red, #e94560);
+  border-color: var(--mecha-red, #e94560);
+  background: rgba(233, 69, 96, 0.1);
+}
+
+#chat-log .chat-message .dice-roll .dice-tooltip .dice-rolls li.discarded {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+
+/* Whisper and blind roll styling */
+#chat-log .chat-message.whisper {
+  background: linear-gradient(90deg, rgba(168, 85, 247, 0.15), var(--mecha-bg-light, #16213e));
+  border-left-color: var(--mecha-purple, #a855f7);
+  border-color: var(--mecha-purple, #a855f7);
+}
+
+#chat-log .chat-message.blind {
+  background: linear-gradient(90deg, rgba(233, 69, 96, 0.15), var(--mecha-bg-light, #16213e));
+  border-left-color: var(--mecha-red, #e94560);
+  border-color: var(--mecha-red, #e94560);
+}
+
+/* ============================================
+   ENEMY SHEET STYLING
+   ============================================ */
+
+/* Enemy sheet uses same base styling as actor sheet */
+.mecha-hack.enemy-sheet {
+  border-color: var(--mecha-red);
+}
+
+.mecha-hack.enemy-sheet .sheet-header {
+  border-bottom-color: var(--mecha-red);
+}
+
+.mecha-hack.enemy-sheet .profile-img {
+  border-color: var(--mecha-red);
+  box-shadow: 0 0 10px rgba(233, 69, 96, 0.3);
+}
+
+.mecha-hack.enemy-sheet .callsign-input {
+  color: var(--mecha-red);
+  text-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
+}
+
+/* Boss checkbox styling */
+.mecha-hack.enemy-sheet .boss-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  background: var(--mecha-accent);
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--mecha-red);
+}
+
+.mecha-hack.enemy-sheet .boss-field label {
+  font-weight: bold;
+  color: var(--mecha-red);
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.mecha-hack.enemy-sheet .boss-field input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--mecha-red);
+}
+
+/* Flavour text block */
+.mecha-hack.enemy-sheet .flavour-block {
+  background: var(--mecha-bg-light);
+  border: 1px solid var(--mecha-border);
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.mecha-hack.enemy-sheet .flavour-block label {
+  display: block;
+  font-weight: bold;
+  color: var(--mecha-red);
+  margin-bottom: 8px;
+}
+
+.mecha-hack.enemy-sheet .flavour-block textarea {
+  width: 100%;
+  min-height: 80px;
+  background: var(--mecha-bg);
+  border: 1px solid var(--mecha-border);
+  border-radius: 4px;
+  color: var(--mecha-text);
+  padding: 8px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 0.95em;
+  line-height: 1.4;
+}
+
+.mecha-hack.enemy-sheet .flavour-block textarea:focus {
+  border-color: var(--mecha-red);
+  outline: none;
+  box-shadow: 0 0 4px var(--mecha-red);
+}
+
+/* Enemy item headers - red accent */
+.mecha-hack.enemy-sheet .item-header h3 {
+  color: var(--mecha-red);
+}
+
+.mecha-hack.enemy-sheet .item-create {
+  color: var(--mecha-red);
+}
+
+.mecha-hack.enemy-sheet .item-create:hover {
+  color: var(--mecha-text);
+}
+
+/* Trait section - yellow color */
+.mecha-hack.enemy-sheet .item-section.traits .item-header h3 {
+  color: var(--mecha-yellow);
+}
+
+.mecha-hack.enemy-sheet .item-section.traits .item-create {
+  color: var(--mecha-yellow);
+}
+
+.mecha-hack.enemy-sheet .item-section.traits .item-create:hover {
+  color: var(--mecha-text);
+}
+
+.mecha-hack.enemy-sheet .item-section.traits .item-list .item .name {
+  color: var(--mecha-yellow);
+}
+
+/* Recharge header with lightning icon - purple */
+.mecha-hack.enemy-sheet .recharge-header h3 {
+  color: var(--mecha-purple);
+}
+
+/* Empty slots */
+.mecha-hack.enemy-sheet .empty-slot {
+  color: var(--mecha-text-dim);
+  font-style: italic;
+}
+
+.mecha-hack.enemy-sheet .empty-slot i {
+  margin-right: 6px;
+  opacity: 0.5;
+}
+
+/* ============================================
+   ATTACK & RECHARGE ATTACK CHAT STYLING
+   ============================================ */
+
+/* Attack roll styling */
+.mecha-roll.attack-roll {
+  border-left-color: var(--mecha-red);
+}
+
+.mecha-roll.attack-roll strong {
+  color: var(--mecha-red);
+}
+
+/* Recharge Attack roll styling */
+.mecha-roll.recharge-attack-roll {
+  border-left-color: var(--mecha-purple);
+  background: linear-gradient(90deg, rgba(168, 85, 247, 0.1), var(--mecha-bg-light));
+}
+
+.mecha-roll.recharge-attack-roll strong {
+  color: var(--mecha-purple);
+}
+
+/* Trait roll styling */
+.mecha-roll.trait-roll {
+  border-left-color: var(--mecha-yellow);
+}
+
+.mecha-roll.trait-roll strong {
+  color: var(--mecha-yellow);
+}
+
+/* ============================================
+   ENEMY ATTACK STYLING
+   ============================================ */
+
+/* Attack details in item list */
+.mecha-hack .item-list .item .detail.attack-damage {
+  color: var(--mecha-red);
+  border-color: var(--mecha-red);
+  background: rgba(233, 69, 96, 0.1);
+  font-weight: bold;
+}
+
+.mecha-hack .item-list .item .detail.attack-range {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.mecha-hack .item-list .item .detail.attack-range-close {
+  color: var(--mecha-red);
+  border-color: var(--mecha-red);
+  background: rgba(233, 69, 96, 0.1);
+}
+
+.mecha-hack .item-list .item .detail.attack-range-near {
+  color: var(--mecha-orange);
+  border-color: var(--mecha-orange);
+  background: rgba(255, 107, 53, 0.1);
+}
+
+.mecha-hack .item-list .item .detail.attack-range-far {
+  color: var(--mecha-cyan);
+  border-color: var(--mecha-cyan);
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.mecha-hack .item-list .item .detail.attack-range-distant {
+  color: var(--mecha-purple);
+  border-color: var(--mecha-purple);
+  background: rgba(168, 85, 247, 0.1);
+}
+
+/* Attack roll in chat */
+.mecha-roll.attack-roll .attack-result {
+  margin: 8px 0;
+  padding: 8px 12px;
+  background: var(--mecha-bg);
+  border-radius: 4px;
+  border-left: 3px solid var(--mecha-red);
+}
+
+.mecha-roll.attack-roll .damage-rolled {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: var(--mecha-red);
+}
+
+.mecha-roll.attack-roll .damage-formula {
+  margin-left: 8px;
+  color: var(--mecha-text-dim);
+  font-size: 0.9em;
+}
+
+.mecha-roll.attack-roll .attack-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.mecha-roll.attack-roll .attack-info {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  background: var(--mecha-bg);
+  border: 1px solid var(--mecha-border);
+}
+
+/* Defend stat colors */
+.mecha-roll .defend-stat-power {
+  color: var(--mecha-red);
+}
+
+.mecha-roll .defend-stat-mobility {
+  color: var(--mecha-cyan);
+}
+
+.mecha-roll .defend-stat-system {
+  color: var(--mecha-yellow);
+}
+
+.mecha-roll .defend-stat-presence {
+  color: var(--mecha-purple);
+}
+
+/* Range colors in chat */
+.mecha-roll .attack-info.range-close {
+  color: var(--mecha-red);
+  border-color: var(--mecha-red);
+}
+
+.mecha-roll .attack-info.range-near {
+  color: var(--mecha-orange);
+  border-color: var(--mecha-orange);
+}
+
+.mecha-roll .attack-info.range-far {
+  color: var(--mecha-cyan);
+  border-color: var(--mecha-cyan);
+}
+
+.mecha-roll .attack-info.range-distant {
+  color: var(--mecha-purple);
+  border-color: var(--mecha-purple);
+}
+
+.mecha-roll .attack-info.targets-info {
+  color: var(--mecha-yellow);
+  border-color: var(--mecha-yellow);
+}
+
+/* ============================================
+   RECHARGE ATTACK STYLING
+   ============================================ */
+
+/* Ready checkbox in item list */
+.mecha-hack.enemy-sheet .recharge-ready {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--mecha-purple);
+  flex-shrink: 0;
+}
+
+/* Recharge section styling */
+.mecha-hack.enemy-sheet .recharge-section .item-list .item .name {
+  color: var(--mecha-purple);
+}
+
+/* Recharge die roll chat styling */
+.mecha-roll.recharge-die-roll {
+  border-left-color: var(--mecha-purple);
+}
+
+.mecha-roll.recharge-die-roll strong {
+  color: var(--mecha-purple);
+}
+
+.mecha-roll.recharge-die-roll .recharge-success {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: rgba(168, 85, 247, 0.15);
+  border-radius: 4px;
+  border-left: 3px solid var(--mecha-purple);
+}
+
+.mecha-roll.recharge-die-roll .recharge-success .recharge-result {
+  display: block;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--mecha-purple);
+}
+
+.mecha-roll.recharge-die-roll .recharge-fail {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: rgba(136, 136, 136, 0.1);
+  border-radius: 4px;
+  border-left: 3px solid var(--mecha-text-dim);
+}
+
+.mecha-roll.recharge-die-roll .recharge-fail .recharge-result {
+  display: block;
+  font-size: 1.1em;
+  font-style: italic;
+  color: var(--mecha-text-dim);
+}
+
+.mecha-roll.recharge-die-roll .recharge-roll-result {
+  display: block;
+  margin-top: 4px;
+  color: var(--mecha-text-dim);
+  font-size: 0.9em;
+}
+
+/* ============================================
+   ENEMY STATS ROW (Hit Dice, HP, AP)
+   ============================================ */
+
+.mecha-hack.enemy-sheet .enemy-stats-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.mecha-hack.enemy-sheet .enemy-stat-field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--mecha-bg);
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--mecha-border);
+}
+
+.mecha-hack.enemy-sheet .enemy-stat-field label {
+  font-weight: bold;
+  font-size: 0.85em;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mecha-hack.enemy-sheet .enemy-health-inputs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mecha-hack.enemy-sheet .enemy-health-inputs input {
+  width: 40px;
+  text-align: center;
+  font-weight: bold;
+  padding: 3px;
+}
+
+.mecha-hack.enemy-sheet .enemy-health-inputs span {
+  color: var(--mecha-text-dim);
+}
+
+/* Hit Dice field */
+.mecha-hack.enemy-sheet .hit-dice-field label {
+  color: var(--mecha-orange);
+}
+
+.mecha-hack.enemy-sheet .hit-dice-field input {
+  width: 60px;
+  text-align: center;
+  font-weight: bold;
+  color: var(--mecha-orange);
+}
+
+/* HP field */
+.mecha-hack.enemy-sheet .hp-field label {
+  color: var(--mecha-orange);
+}
+
+/* AP field */
+.mecha-hack.enemy-sheet .ap-field label {
+  color: var(--mecha-cyan);
+}
+
+/* Restore buttons */
+.mecha-hack.enemy-sheet .enemy-stat-field label .restore-hp,
+.mecha-hack.enemy-sheet .enemy-stat-field label .restore-ap {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mecha-hack.enemy-sheet .enemy-stat-field label .restore-hp {
+  color: var(--mecha-orange);
+}
+
+.mecha-hack.enemy-sheet .enemy-stat-field label .restore-hp:hover {
+  color: #ff8855;
+  text-shadow: 0 0 8px var(--mecha-orange);
+}
+
+.mecha-hack.enemy-sheet .enemy-stat-field label .restore-ap {
+  color: var(--mecha-cyan);
+}
+
+.mecha-hack.enemy-sheet .enemy-stat-field label .restore-ap:hover {
+  color: #33ddff;
+  text-shadow: 0 0 8px var(--mecha-cyan);
+}
+
+/* ============================================
+   BOSS MODE STYLING
+   ============================================ */
+
+/* Boss mode chat message */
+.mecha-roll.boss-mode-roll {
+  border-left-color: gold;
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.15), var(--mecha-bg-light));
+}
+
+.mecha-roll.boss-mode-roll strong {
+  color: var(--mecha-red);
+}
+
+.mecha-roll.boss-mode-roll .boss-mode-text {
+  color: gold;
+  font-weight: bold;
+  font-size: 1.2em;
+  text-shadow: 0 0 8px gold;
+  animation: boss-pulse 0.5s ease-in-out 3;
+}
+
+@keyframes boss-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Boss section styling */
+.mecha-hack.enemy-sheet .item-section.boss-attacks .item-header,
+.mecha-hack.enemy-sheet .item-section.boss-recharge-attacks .item-header {
+  border-left: 3px solid gold;
+}
+
+.mecha-hack.enemy-sheet .item-section.boss-attacks .item-header h3,
+.mecha-hack.enemy-sheet .item-section.boss-recharge-attacks .item-header h3 {
+  color: gold;
+}
+
+.mecha-hack.enemy-sheet .item-section.boss-attacks .item-create,
+.mecha-hack.enemy-sheet .item-section.boss-recharge-attacks .item-create {
+  color: gold;
+}
+
+.mecha-hack.enemy-sheet .item-section.boss-attacks .item-create:hover,
+.mecha-hack.enemy-sheet .item-section.boss-recharge-attacks .item-create:hover {
+  color: var(--mecha-text);
+}
+
+/* Boss attacks list item names */
+.mecha-hack.enemy-sheet .item-section.boss-attacks .item-list .item .name,
+.mecha-hack.enemy-sheet .item-section.boss-recharge-attacks .item-list .item .name {
+  color: gold;
+}
+
+/* Boss recharge ready checkbox */
+.mecha-hack.enemy-sheet .boss-recharge-ready {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: gold;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   BOSS INFO BLOCK
+   ============================================ */
+
+.mecha-hack.enemy-sheet .boss-info-block {
+  background: var(--mecha-bg-light);
+  border: 1px solid gold;
+  border-left: 3px solid gold;
+  border-radius: 4px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+}
+
+.mecha-hack.enemy-sheet .boss-info-title {
+  color: gold;
+  font-weight: bold;
+  font-size: 0.95em;
+  margin-bottom: 8px;
+}
+
+.mecha-hack.enemy-sheet .boss-info-title i {
+  margin-right: 6px;
+}
+
+.mecha-hack.enemy-sheet .boss-info-list {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--mecha-text);
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.mecha-hack.enemy-sheet .boss-info-list li {
+  margin-bottom: 2px;
+}
+
+/* Boss info greyed out when disabled */
+.mecha-hack.enemy-sheet .boss-info-block.boss-disabled {
+  border-color: var(--mecha-text-dim);
+  opacity: 0.6;
+}
+
+.mecha-hack.enemy-sheet .boss-info-block.boss-disabled .boss-info-title {
+  color: var(--mecha-text-dim);
+}
+
+.mecha-hack.enemy-sheet .boss-info-block.boss-disabled .boss-info-list {
+  color: var(--mecha-text-dim);
+}
+
+/* ============================================
+   BOSS DISABLED STATE
+   When boss mode is not engaged, boss sections
+   are visible but greyed out
+   ============================================ */
+
+.mecha-hack.enemy-sheet .item-section.boss-attacks.boss-disabled,
+.mecha-hack.enemy-sheet .item-section.boss-recharge-attacks.boss-disabled {
+  opacity: 0.5;
+  position: relative;
+}
+
+.mecha-hack.enemy-sheet .item-section.boss-attacks.boss-disabled .item-header,
+.mecha-hack.enemy-sheet .item-section.boss-recharge-attacks.boss-disabled .item-header {
+  background: var(--mecha-bg);
+  border-left-color: var(--mecha-text-dim);
+}
+
+.mecha-hack.enemy-sheet .item-section.boss-attacks.boss-disabled .item-header h3,
+.mecha-hack.enemy-sheet .item-section.boss-recharge-attacks.boss-disabled .item-header h3 {
+  color: var(--mecha-text-dim);
+}
+
+.mecha-hack.enemy-sheet .item-section.boss-attacks.boss-disabled .item-create,
+.mecha-hack.enemy-sheet .item-section.boss-recharge-attacks.boss-disabled .item-create {
+  color: var(--mecha-text-dim);
+}
+
+.mecha-hack.enemy-sheet .item-section.boss-attacks.boss-disabled .item-list .item .name,
+.mecha-hack.enemy-sheet .item-section.boss-recharge-attacks.boss-disabled .item-list .item .name {
+  color: var(--mecha-text-dim);
+}
+
+/* Roll buttons are disabled when boss mode is off */
+.mecha-hack.enemy-sheet .item-section.boss-disabled .item-roll-boss-attack,
+.mecha-hack.enemy-sheet .item-section.boss-disabled .item-roll-boss-recharge-die,
+.mecha-hack.enemy-sheet .item-section.boss-disabled .item-roll-boss-recharge-attack {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Ready checkbox is disabled when boss mode is off */
+.mecha-hack.enemy-sheet .item-section.boss-disabled .boss-recharge-ready {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Edit and delete buttons still work */
+.mecha-hack.enemy-sheet .item-section.boss-disabled .item-edit,
+.mecha-hack.enemy-sheet .item-section.boss-disabled .item-delete-confirm {
+  opacity: 1;
+}
+
+.mecha-hack.enemy-sheet .item-section.boss-disabled .item-edit:hover {
+  color: var(--mecha-cyan);
+}
+
+.mecha-hack.enemy-sheet .item-section.boss-disabled .item-delete-confirm:hover {
+  color: var(--mecha-red);
+}
+
+/* Add button still works */
+.mecha-hack.enemy-sheet .item-section.boss-disabled .item-create {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.mecha-hack.enemy-sheet .item-section.boss-disabled .item-create:hover {
+  color: var(--mecha-text);
+}
+
+/* ============================================
+   DRAGGABLE ROLL BUTTONS (Macro Support)
+   ============================================ */
+
+/* Make roll buttons show drag cursor */
+.mecha-hack .stat-roll[draggable="true"],
+.mecha-hack .die-roll[draggable="true"],
+.mecha-hack .item-roll[draggable="true"],
+.mecha-hack .item-roll-attack[draggable="true"],
+.mecha-hack .item-roll-recharge-attack[draggable="true"],
+.mecha-hack .item-roll-recharge-die[draggable="true"],
+.mecha-hack .item-roll-boss-attack[draggable="true"],
+.mecha-hack .item-roll-boss-recharge-attack[draggable="true"],
+.mecha-hack .item-roll-boss-recharge-die[draggable="true"],
+.mecha-hack .item-roll-consumable[draggable="true"] {
+  cursor: grab;
+}
+
+.mecha-hack .stat-roll[draggable="true"]:active,
+.mecha-hack .die-roll[draggable="true"]:active,
+.mecha-hack .item-roll[draggable="true"]:active,
+.mecha-hack .item-roll-attack[draggable="true"]:active,
+.mecha-hack .item-roll-recharge-attack[draggable="true"]:active,
+.mecha-hack .item-roll-recharge-die[draggable="true"]:active,
+.mecha-hack .item-roll-boss-attack[draggable="true"]:active,
+.mecha-hack .item-roll-boss-recharge-attack[draggable="true"]:active,
+.mecha-hack .item-roll-boss-recharge-die[draggable="true"]:active,
+.mecha-hack .item-roll-consumable[draggable="true"]:active {
+  cursor: grabbing;
+}
+
+/* ============================================
+   FOUNDRY DIALOG THEMING
+   Make dialogs consistent with actor sheet
+   ============================================ */
+
+/* Dialog window frame - cyan border like actor sheet */
+.app.dialog {
+  border: 2px solid var(--mecha-cyan, #00d4ff);
+  border-radius: 4px;
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+
+/* Dialog windows */
+.app.dialog .window-content {
+  background: var(--mecha-bg, #1a1a2e);
+  color: var(--mecha-text, #e8e8e8);
+}
+
+.app.dialog .dialog-content {
+  color: var(--mecha-text, #e8e8e8);
+}
+
+.app.dialog .dialog-content p {
+  color: var(--mecha-text, #e8e8e8);
+}
+
+.app.dialog .dialog-buttons {
+  background: var(--mecha-bg-light, #16213e);
+  border-top: 1px solid var(--mecha-border, #333);
+}
+
+.app.dialog .dialog-buttons button {
+  background: var(--mecha-accent, #0f3460);
+  color: var(--mecha-text, #e8e8e8);
+  border: 1px solid var(--mecha-border, #333);
+}
+
+.app.dialog .dialog-buttons button:hover {
+  background: var(--mecha-cyan, #00d4ff);
+  color: var(--mecha-bg, #1a1a2e);
+  border-color: var(--mecha-cyan, #00d4ff);
+}
+
+/* Dialog header */
+.app.dialog .window-header {
+  background: var(--mecha-bg-light, #16213e);
+  border-bottom: 2px solid var(--mecha-cyan, #00d4ff);
+  color: var(--mecha-cyan, #00d4ff);
+}
+
+.app.dialog .window-header .window-title {
+  color: var(--mecha-cyan, #00d4ff);
+}
+
+.app.dialog .window-header .close {
+  color: var(--mecha-text-dim, #888);
+}
+
+.app.dialog .window-header .close:hover {
+  color: var(--mecha-red, #e94560);
+}
+
+/* Dialog inputs */
+.app.dialog input,
+.app.dialog select,
+.app.dialog textarea {
+  background: var(--mecha-bg-light, #16213e);
+  color: var(--mecha-text, #e8e8e8);
+  border: 1px solid var(--mecha-border, #333);
+}
+
+.app.dialog input:focus,
+.app.dialog select:focus,
+.app.dialog textarea:focus {
+  border-color: var(--mecha-cyan, #00d4ff);
+  outline: none;
+  box-shadow: 0 0 4px var(--mecha-cyan, #00d4ff);
+}
+
+/* Dialog checkbox styling */
+.app.dialog input[type="checkbox"] {
+  accent-color: var(--mecha-cyan, #00d4ff);
+}
+
+/* Dialog labels */
+.app.dialog label {
+  color: var(--mecha-text, #e8e8e8);
+}
+
+/* Modifier buttons in stat roll dialog */
+.app.dialog .mod-decrease,
+.app.dialog .mod-increase {
+  background: var(--mecha-accent, #0f3460);
+  color: var(--mecha-cyan, #00d4ff);
+  border: 1px solid var(--mecha-cyan, #00d4ff);
+  border-radius: 4px;
+}
+
+.app.dialog .mod-decrease:hover,
+.app.dialog .mod-increase:hover {
+  background: var(--mecha-cyan, #00d4ff);
+  color: var(--mecha-bg, #1a1a2e);
+}

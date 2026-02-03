@@ -1,0 +1,321 @@
+<form class="mecha-hack sheet actor {{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="120" width="120" />
+    <div class="header-fields">
+      <div class="callsign-row">
+        <label>Callsign</label>
+        <input class="callsign-input" name="name" type="text" value="{{actor.name}}" placeholder="Callsign" />
+        <div class="level-field">
+          <label>Level</label>
+          <input type="number" name="system.level" value="{{system.level}}" min="1" />
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Pilot Archetype</label>
+          <input type="text" name="system.pilot" value="{{system.pilot}}" placeholder="Pilot Archetype" />
+        </div>
+        <div class="field">
+          <label>Chassis</label>
+          <input type="text" name="system.chassis" value="{{system.chassis}}" placeholder="Chassis Type" />
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field pilot-record-field">
+          <label>Pilot Record</label>
+          <input type="text" name="system.pilotRecord" value="{{system.pilotRecord}}" placeholder="Pilot Record" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="main"><i class="fas fa-home"></i> Main</a>
+    <a class="item" data-tab="items"><i class="fas fa-suitcase"></i> Items</a>
+    <a class="item" data-tab="notes"><i class="fas fa-sticky-note"></i> Notes</a>
+  </nav>
+
+  <section class="sheet-body">
+    
+    {{!-- MAIN TAB --}}
+    <div class="tab main" data-group="primary" data-tab="main">
+      
+      <div class="section no-header">
+        <div class="health-grid">
+          <div class="health-bar hp">
+            <label><a class="restore-hp" title="Restore HP to Max"><i class="fas fa-plus-circle"></i></a> Hit Points</label>
+            <div class="health-inputs">
+              <div class="health-field">
+                <span class="health-label">Current</span>
+                <input type="number" name="system.hitPoints.value" value="{{system.hitPoints.value}}" min="0" />
+              </div>
+              <span class="health-divider">/</span>
+              <div class="health-field">
+                <span class="health-label">Max</span>
+                <input type="number" name="system.hitPoints.max" value="{{system.hitPoints.max}}" min="1" />
+              </div>
+            </div>
+            <div class="bar"><div class="fill" style="width: {{system.hitPoints.pct}}%"></div></div>
+          </div>
+          <div class="health-bar armor">
+            <label><a class="restore-ap" title="Restore AP to Max"><i class="fas fa-wrench"></i></a> Armor Points</label>
+            <div class="health-inputs">
+              <div class="health-field">
+                <span class="health-label">Current</span>
+                <input type="number" name="system.armorPoints.value" value="{{system.armorPoints.value}}" min="0" />
+              </div>
+              <span class="health-divider">/</span>
+              <div class="health-field">
+                <span class="health-label">Max</span>
+                <input type="number" name="system.armorPoints.max" value="{{system.armorPoints.max}}" min="1" />
+              </div>
+            </div>
+            <div class="bar"><div class="fill" style="width: {{system.armorPoints.pct}}%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section no-header">
+        <div class="stats-grid">
+          <div class="stat-block">
+            <span class="stat-label">Power</span>
+            <input type="number" name="system.stats.power.value" value="{{system.stats.power.value}}" min="1" max="20" />
+            <button type="button" class="stat-roll" data-stat="power" draggable="true"><i class="fas fa-dice-d20"></i> Roll</button>
+          </div>
+          <div class="stat-block">
+            <span class="stat-label">Mobility</span>
+            <input type="number" name="system.stats.mobility.value" value="{{system.stats.mobility.value}}" min="1" max="20" />
+            <button type="button" class="stat-roll" data-stat="mobility" draggable="true"><i class="fas fa-dice-d20"></i> Roll</button>
+          </div>
+          <div class="stat-block">
+            <span class="stat-label">System</span>
+            <input type="number" name="system.stats.system.value" value="{{system.stats.system.value}}" min="1" max="20" />
+            <button type="button" class="stat-roll" data-stat="system" draggable="true"><i class="fas fa-dice-d20"></i> Roll</button>
+          </div>
+          <div class="stat-block">
+            <span class="stat-label">Presence</span>
+            <input type="number" name="system.stats.presence.value" value="{{system.stats.presence.value}}" min="1" max="20" />
+            <button type="button" class="stat-roll" data-stat="presence" draggable="true"><i class="fas fa-dice-d20"></i> Roll</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section no-header">
+        <div class="dice-grid">
+          <div class="die-block hit">
+            <label>Hit Die</label>
+            <select name="system.dice.hit">
+              {{#each diceTypes}}
+              <option value="{{this}}" {{#if (eq this ../system.dice.hit)}}selected{{/if}}>{{upper this}}</option>
+              {{/each}}
+            </select>
+            <button type="button" class="die-roll" data-die="hit" draggable="true"><i class="fas fa-dice"></i> Roll</button>
+          </div>
+          <div class="die-block damage">
+            <label>Damage Die</label>
+            <select name="system.dice.damage">
+              {{#each diceTypes}}
+              <option value="{{this}}" {{#if (eq this ../system.dice.damage)}}selected{{/if}}>{{upper this}}</option>
+              {{/each}}
+            </select>
+            <button type="button" class="die-roll" data-die="damage" draggable="true"><i class="fas fa-dice"></i> Roll</button>
+          </div>
+          <div class="die-block reactor">
+            <label>Reactor Die</label>
+            <select name="system.dice.reactor">
+              {{#each diceTypes}}
+              <option value="{{this}}" {{#if (eq this ../system.dice.reactor)}}selected{{/if}}>{{upper this}}</option>
+              {{/each}}
+            </select>
+            <button type="button" class="die-roll" data-die="reactor" draggable="true"><i class="fas fa-dice"></i> Roll</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section no-header">
+        <div class="item-section pilot-abilities">
+          <div class="item-header">
+            <h3><i class="fas fa-user"></i> Pilot Ability</h3>
+            {{#if (lt pilotAbilities.length 1)}}
+            <a class="item-create" data-type="pilotAbility"><i class="fas fa-plus"></i> Add</a>
+            {{/if}}
+          </div>
+          <ul class="item-list">
+            {{#each pilotAbilities}}
+            <li class="item" data-item-id="{{this._id}}">
+              <img src="{{this.img}}" width="24" height="24" />
+              <span class="name">{{this.name}}</span>
+              <div class="controls">
+                <a class="item-roll" title="Link to Chat" draggable="true"><i class="fas fa-comment"></i></a>
+                <a class="item-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                <a class="item-delete-confirm" title="Delete"><i class="fas fa-trash"></i></a>
+              </div>
+            </li>
+            {{else}}
+            <li class="item item-empty">
+              <span class="empty-slot">Empty Pilot Ability Slot</span>
+            </li>
+            {{/each}}
+          </ul>
+        </div>
+
+        <div class="item-section chassis-abilities">
+          <div class="item-header">
+            <h3><i class="fas fa-robot"></i> Chassis Abilities</h3>
+            {{#if (lt chassisAbilities.length 2)}}
+            <a class="item-create" data-type="chassisAbility"><i class="fas fa-plus"></i> Add</a>
+            {{/if}}
+          </div>
+          <ul class="item-list">
+            {{#each chassisAbilitySlots}}
+            {{#if this.empty}}
+            <li class="item item-empty">
+              <span class="empty-slot-number">{{this.slotNumber}}</span>
+              <span class="empty-slot">Empty Chassis Ability Slot</span>
+            </li>
+            {{else}}
+            <li class="item" data-item-id="{{this._id}}">
+              <img src="{{this.img}}" width="24" height="24" />
+              <span class="name">{{this.name}}</span>
+              <div class="controls">
+                <a class="item-roll" title="Link to Chat" draggable="true"><i class="fas fa-comment"></i></a>
+                <a class="item-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                <a class="item-delete-confirm" title="Delete"><i class="fas fa-trash"></i></a>
+              </div>
+            </li>
+            {{/if}}
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    {{!-- ITEMS TAB --}}
+    <div class="tab items" data-group="primary" data-tab="items">
+      
+      <div class="item-section">
+        <div class="item-header">
+          <h3><i class="fas fa-crosshairs"></i> Weapons</h3>
+          <a class="item-create" data-type="weapon"><i class="fas fa-plus"></i> Add</a>
+        </div>
+        <ul class="item-list">
+          {{#each weapons}}
+          <li class="item" data-item-id="{{this._id}}">
+            <img src="{{this.img}}" width="24" height="24" />
+            <span class="name">{{this.name}}</span>
+            <span class="detail weapon-range-{{this.system.range}}">{{this.system.range}}</span>
+            <span class="detail weapon-hands">{{#if (eq this.system.hands "oneHanded")}}1H{{else}}2H{{/if}}</span>
+            <div class="controls">
+              <a class="item-roll" title="Link to Chat" draggable="true"><i class="fas fa-comment"></i></a>
+              <a class="item-edit" title="Edit"><i class="fas fa-edit"></i></a>
+              <a class="item-delete-confirm" title="Delete"><i class="fas fa-trash"></i></a>
+            </div>
+          </li>
+          {{else}}
+          <li class="item item-empty"><span class="empty-slot">No weapons</span></li>
+          {{/each}}
+        </ul>
+      </div>
+
+      <div class="item-section">
+        <div class="item-header">
+          <h3><i class="fas fa-shield-alt"></i> Armor</h3>
+          <a class="item-create" data-type="armor"><i class="fas fa-plus"></i> Add</a>
+        </div>
+        <ul class="item-list">
+          {{#each armors}}
+          <li class="item" data-item-id="{{this._id}}">
+            <img src="{{this.img}}" width="24" height="24" />
+            <span class="name">{{this.name}}</span>
+            <span class="detail armor-bonus">+{{this.system.armorBonus}} AP</span>
+            <div class="controls">
+              <a class="item-roll" title="Link to Chat" draggable="true"><i class="fas fa-comment"></i></a>
+              <a class="item-edit" title="Edit"><i class="fas fa-edit"></i></a>
+              <a class="item-delete-confirm" title="Delete"><i class="fas fa-trash"></i></a>
+            </div>
+          </li>
+          {{else}}
+          <li class="item item-empty"><span class="empty-slot">No armor</span></li>
+          {{/each}}
+        </ul>
+      </div>
+
+      <div class="item-section">
+        <div class="item-header">
+          <h3><i class="fas fa-microchip"></i> Modules</h3>
+          <a class="item-create" data-type="module"><i class="fas fa-plus"></i> Add</a>
+        </div>
+        <ul class="item-list">
+          {{#each modules}}
+          <li class="item" data-item-id="{{this._id}}">
+            <img src="{{this.img}}" width="24" height="24" />
+            <span class="name">{{this.name}}</span>
+            <span class="detail module-type-{{this.system.moduleType}}">{{this.system.moduleType}}</span>
+            <div class="controls">
+              <a class="item-roll" title="Link to Chat" draggable="true"><i class="fas fa-comment"></i></a>
+              <a class="item-edit" title="Edit"><i class="fas fa-edit"></i></a>
+              <a class="item-delete-confirm" title="Delete"><i class="fas fa-trash"></i></a>
+            </div>
+          </li>
+          {{else}}
+          <li class="item item-empty"><span class="empty-slot">No modules</span></li>
+          {{/each}}
+        </ul>
+      </div>
+
+      <div class="item-section">
+        <div class="item-header">
+          <h3><i class="fas fa-toolbox"></i> Equipment</h3>
+          <a class="item-create" data-type="equipment"><i class="fas fa-plus"></i> Add</a>
+        </div>
+        <ul class="item-list">
+          {{#each equipment}}
+          <li class="item" data-item-id="{{this._id}}">
+            <img src="{{this.img}}" width="24" height="24" />
+            <span class="name">{{this.name}}</span>
+            <div class="controls">
+              <a class="item-roll" title="Link to Chat" draggable="true"><i class="fas fa-comment"></i></a>
+              <a class="item-edit" title="Edit"><i class="fas fa-edit"></i></a>
+              <a class="item-delete-confirm" title="Delete"><i class="fas fa-trash"></i></a>
+            </div>
+          </li>
+          {{else}}
+          <li class="item item-empty"><span class="empty-slot">No equipment</span></li>
+          {{/each}}
+        </ul>
+      </div>
+
+      <div class="item-section">
+        <div class="item-header">
+          <h3><i class="fas fa-flask"></i> Consumables</h3>
+          <a class="item-create" data-type="consumable"><i class="fas fa-plus"></i> Add</a>
+        </div>
+        <ul class="item-list">
+          {{#each consumables}}
+          <li class="item" data-item-id="{{this._id}}">
+            <img src="{{this.img}}" width="24" height="24" />
+            <span class="name">{{this.name}}</span>
+            <span class="detail consumable-uses">{{this.system.uses}} uses</span>
+            <div class="controls">
+              <a class="item-roll-consumable" title="Use Consumable" draggable="true"><i class="fas fa-play"></i></a>
+              <a class="item-roll" title="Link to Chat" draggable="true"><i class="fas fa-comment"></i></a>
+              <a class="item-edit" title="Edit"><i class="fas fa-edit"></i></a>
+              <a class="item-delete-confirm" title="Delete"><i class="fas fa-trash"></i></a>
+            </div>
+          </li>
+          {{else}}
+          <li class="item item-empty"><span class="empty-slot">No consumables</span></li>
+          {{/each}}
+        </ul>
+      </div>
+
+    </div>
+
+    {{!-- NOTES TAB --}}
+    <div class="tab notes" data-group="primary" data-tab="notes">
+      <div class="notes-section">
+        <textarea class="notes-field" name="system.notes" placeholder="Write your notes here...">{{system.notes}}</textarea>
+      </div>
+    </div>
+  </section>
+</form>

@@ -1,0 +1,283 @@
+<form class="mecha-hack sheet item {{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="50" width="50" />
+    <div class="header-fields">
+      <h1><input name="name" type="text" value="{{item.name}}" placeholder="Item Name" /></h1>
+      <span class="item-type">
+        {{#if (eq item.type "pilotAbility")}}Pilot Ability{{/if}}
+        {{#if (eq item.type "chassisAbility")}}Chassis Ability{{/if}}
+        {{#if (eq item.type "enemyTrait")}}Trait{{/if}}
+        {{#if (eq item.type "enemyAttack")}}Attack{{/if}}
+        {{#if (eq item.type "enemyRechargeAttack")}}Recharge Attack{{/if}}
+        {{#if (eq item.type "bossAttack")}}Boss Attack{{/if}}
+        {{#if (eq item.type "bossRechargeAttack")}}Boss Recharge Attack{{/if}}
+        {{#if (eq item.type "weapon")}}Weapon{{/if}}
+        {{#if (eq item.type "armor")}}Armor{{/if}}
+        {{#if (eq item.type "module")}}Module{{/if}}
+        {{#if (eq item.type "equipment")}}Equipment{{/if}}
+        {{#if (eq item.type "consumable")}}Consumable{{/if}}
+      </span>
+    </div>
+  </header>
+
+  <section class="sheet-body">
+    {{!-- WEAPON --}}
+    {{#if (eq item.type "weapon")}}
+    <div class="form-group">
+      <label>Range</label>
+      <select name="system.range" class="weapon-select">
+        <option value="melee" {{#if (eq system.range "melee")}}selected{{/if}}>Melee</option>
+        <option value="ranged" {{#if (eq system.range "ranged")}}selected{{/if}}>Ranged</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Hands</label>
+      <select name="system.hands" class="weapon-select">
+        <option value="oneHanded" {{#if (eq system.hands "oneHanded")}}selected{{/if}}>One Handed</option>
+        <option value="twoHanded" {{#if (eq system.hands "twoHanded")}}selected{{/if}}>Two Handed</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Cost</label>
+      <input type="text" name="system.cost" value="{{system.cost}}" placeholder="e.g., 100 credits" />
+    </div>
+    <div class="form-group stacked">
+      <label>Weapon Qualities</label>
+      <textarea name="system.qualities" placeholder="Weapon qualities...">{{system.qualities}}</textarea>
+    </div>
+    <div class="form-group stacked">
+      <label>Description</label>
+      <textarea name="system.description" placeholder="Weapon description...">{{system.description}}</textarea>
+    </div>
+    {{/if}}
+
+    {{!-- ARMOR --}}
+    {{#if (eq item.type "armor")}}
+    <div class="form-group">
+      <label>Armor Points</label>
+      <input type="number" name="system.armorBonus" value="{{system.armorBonus}}" min="0" />
+    </div>
+    <div class="form-group">
+      <label>Cost</label>
+      <input type="text" name="system.cost" value="{{system.cost}}" placeholder="e.g., 100 credits" />
+    </div>
+    <div class="form-group stacked">
+      <label>Description</label>
+      <textarea name="system.description" placeholder="Armor description...">{{system.description}}</textarea>
+    </div>
+    {{/if}}
+
+    {{!-- MODULE --}}
+    {{#if (eq item.type "module")}}
+    <div class="form-group">
+      <label>Type</label>
+      <select name="system.moduleType" class="module-type-select">
+        <option value="utility" {{#if (eq system.moduleType "utility")}}selected{{/if}}>Utility</option>
+        <option value="offensive" {{#if (eq system.moduleType "offensive")}}selected{{/if}}>Offensive</option>
+        <option value="defensive" {{#if (eq system.moduleType "defensive")}}selected{{/if}}>Defensive</option>
+      </select>
+    </div>
+    <div class="form-group stacked">
+      <label>Description</label>
+      <textarea name="system.description" placeholder="Module description...">{{system.description}}</textarea>
+    </div>
+    {{/if}}
+
+    {{!-- EQUIPMENT --}}
+    {{#if (eq item.type "equipment")}}
+    <div class="form-group">
+      <label>Cost</label>
+      <input type="text" name="system.cost" value="{{system.cost}}" placeholder="e.g., 100 credits" />
+    </div>
+    <div class="form-group stacked">
+      <label>Description</label>
+      <textarea name="system.description" placeholder="Equipment description...">{{system.description}}</textarea>
+    </div>
+    {{/if}}
+
+    {{!-- CONSUMABLE --}}
+    {{#if (eq item.type "consumable")}}
+    <div class="form-group">
+      <label>Uses</label>
+      <input type="number" name="system.uses" value="{{system.uses}}" min="0" />
+    </div>
+    <div class="form-group">
+      <label>Cost</label>
+      <input type="text" name="system.cost" value="{{system.cost}}" placeholder="e.g., 100 credits" />
+    </div>
+    <div class="form-group stacked">
+      <label>Description</label>
+      <textarea name="system.description" placeholder="Consumable description...">{{system.description}}</textarea>
+    </div>
+    {{/if}}
+
+    {{!-- PILOT ABILITY --}}
+    {{#if (eq item.type "pilotAbility")}}
+    <div class="form-group stacked">
+      <label>Description</label>
+      <textarea name="system.description" placeholder="Ability description...">{{system.description}}</textarea>
+    </div>
+    {{/if}}
+
+    {{!-- CHASSIS ABILITY --}}
+    {{#if (eq item.type "chassisAbility")}}
+    <div class="form-group stacked">
+      <label>Description</label>
+      <textarea name="system.description" placeholder="Ability description...">{{system.description}}</textarea>
+    </div>
+    {{/if}}
+
+    {{!-- ENEMY TRAIT --}}
+    {{#if (eq item.type "enemyTrait")}}
+    <div class="form-group stacked">
+      <label>Description</label>
+      <textarea name="system.description" placeholder="Trait description...">{{system.description}}</textarea>
+    </div>
+    {{/if}}
+
+    {{!-- ENEMY ATTACK --}}
+    {{#if (eq item.type "enemyAttack")}}
+    <div class="form-group">
+      <label>Damage</label>
+      <input type="text" name="system.damage" value="{{system.damage}}" placeholder="e.g., 1d6+2" />
+    </div>
+    <div class="form-group">
+      <label>Defend With</label>
+      <select name="system.defendStat" class="attack-select">
+        <option value="power" {{#if (eq system.defendStat "power")}}selected{{/if}}>Power</option>
+        <option value="mobility" {{#if (eq system.defendStat "mobility")}}selected{{/if}}>Mobility</option>
+        <option value="system" {{#if (eq system.defendStat "system")}}selected{{/if}}>System</option>
+        <option value="presence" {{#if (eq system.defendStat "presence")}}selected{{/if}}>Presence</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Targets</label>
+      <input type="number" name="system.targets" value="{{system.targets}}" min="1" />
+    </div>
+    <div class="form-group">
+      <label>Range</label>
+      <select name="system.attackRange" class="attack-select">
+        <option value="close" {{#if (eq system.attackRange "close")}}selected{{/if}}>Close</option>
+        <option value="near" {{#if (eq system.attackRange "near")}}selected{{/if}}>Near</option>
+        <option value="far" {{#if (eq system.attackRange "far")}}selected{{/if}}>Far</option>
+        <option value="distant" {{#if (eq system.attackRange "distant")}}selected{{/if}}>Distant</option>
+      </select>
+    </div>
+    <div class="form-group stacked">
+      <label>Description</label>
+      <textarea name="system.description" placeholder="Attack description...">{{system.description}}</textarea>
+    </div>
+    {{/if}}
+
+    {{!-- ENEMY RECHARGE ATTACK --}}
+    {{#if (eq item.type "enemyRechargeAttack")}}
+    <div class="form-group">
+      <label>Ready</label>
+      <input type="checkbox" name="system.ready" {{#if system.ready}}checked{{/if}} />
+    </div>
+    <div class="form-group">
+      <label>Damage</label>
+      <input type="text" name="system.damage" value="{{system.damage}}" placeholder="e.g., 2d6+4" />
+    </div>
+    <div class="form-group">
+      <label>Defend With</label>
+      <select name="system.defendStat" class="attack-select">
+        <option value="power" {{#if (eq system.defendStat "power")}}selected{{/if}}>Power</option>
+        <option value="mobility" {{#if (eq system.defendStat "mobility")}}selected{{/if}}>Mobility</option>
+        <option value="system" {{#if (eq system.defendStat "system")}}selected{{/if}}>System</option>
+        <option value="presence" {{#if (eq system.defendStat "presence")}}selected{{/if}}>Presence</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Targets</label>
+      <input type="number" name="system.targets" value="{{system.targets}}" min="1" />
+    </div>
+    <div class="form-group">
+      <label>Range</label>
+      <select name="system.attackRange" class="attack-select">
+        <option value="close" {{#if (eq system.attackRange "close")}}selected{{/if}}>Close</option>
+        <option value="near" {{#if (eq system.attackRange "near")}}selected{{/if}}>Near</option>
+        <option value="far" {{#if (eq system.attackRange "far")}}selected{{/if}}>Far</option>
+        <option value="distant" {{#if (eq system.attackRange "distant")}}selected{{/if}}>Distant</option>
+      </select>
+    </div>
+    <div class="form-group stacked">
+      <label>Description</label>
+      <textarea name="system.description" placeholder="Attack description...">{{system.description}}</textarea>
+    </div>
+    {{/if}}
+
+    {{!-- BOSS ATTACK --}}
+    {{#if (eq item.type "bossAttack")}}
+    <div class="form-group">
+      <label>Damage</label>
+      <input type="text" name="system.damage" value="{{system.damage}}" placeholder="e.g., 1d6+2" />
+    </div>
+    <div class="form-group">
+      <label>Defend With</label>
+      <select name="system.defendStat" class="attack-select">
+        <option value="power" {{#if (eq system.defendStat "power")}}selected{{/if}}>Power</option>
+        <option value="mobility" {{#if (eq system.defendStat "mobility")}}selected{{/if}}>Mobility</option>
+        <option value="system" {{#if (eq system.defendStat "system")}}selected{{/if}}>System</option>
+        <option value="presence" {{#if (eq system.defendStat "presence")}}selected{{/if}}>Presence</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Targets</label>
+      <input type="number" name="system.targets" value="{{system.targets}}" min="1" />
+    </div>
+    <div class="form-group">
+      <label>Range</label>
+      <select name="system.attackRange" class="attack-select">
+        <option value="close" {{#if (eq system.attackRange "close")}}selected{{/if}}>Close</option>
+        <option value="near" {{#if (eq system.attackRange "near")}}selected{{/if}}>Near</option>
+        <option value="far" {{#if (eq system.attackRange "far")}}selected{{/if}}>Far</option>
+        <option value="distant" {{#if (eq system.attackRange "distant")}}selected{{/if}}>Distant</option>
+      </select>
+    </div>
+    <div class="form-group stacked">
+      <label>Description</label>
+      <textarea name="system.description" placeholder="Attack description...">{{system.description}}</textarea>
+    </div>
+    {{/if}}
+
+    {{!-- BOSS RECHARGE ATTACK --}}
+    {{#if (eq item.type "bossRechargeAttack")}}
+    <div class="form-group">
+      <label>Ready</label>
+      <input type="checkbox" name="system.ready" {{#if system.ready}}checked{{/if}} />
+    </div>
+    <div class="form-group">
+      <label>Damage</label>
+      <input type="text" name="system.damage" value="{{system.damage}}" placeholder="e.g., 2d6+4" />
+    </div>
+    <div class="form-group">
+      <label>Defend With</label>
+      <select name="system.defendStat" class="attack-select">
+        <option value="power" {{#if (eq system.defendStat "power")}}selected{{/if}}>Power</option>
+        <option value="mobility" {{#if (eq system.defendStat "mobility")}}selected{{/if}}>Mobility</option>
+        <option value="system" {{#if (eq system.defendStat "system")}}selected{{/if}}>System</option>
+        <option value="presence" {{#if (eq system.defendStat "presence")}}selected{{/if}}>Presence</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Targets</label>
+      <input type="number" name="system.targets" value="{{system.targets}}" min="1" />
+    </div>
+    <div class="form-group">
+      <label>Range</label>
+      <select name="system.attackRange" class="attack-select">
+        <option value="close" {{#if (eq system.attackRange "close")}}selected{{/if}}>Close</option>
+        <option value="near" {{#if (eq system.attackRange "near")}}selected{{/if}}>Near</option>
+        <option value="far" {{#if (eq system.attackRange "far")}}selected{{/if}}>Far</option>
+        <option value="distant" {{#if (eq system.attackRange "distant")}}selected{{/if}}>Distant</option>
+      </select>
+    </div>
+    <div class="form-group stacked">
+      <label>Description</label>
+      <textarea name="system.description" placeholder="Attack description...">{{system.description}}</textarea>
+    </div>
+    {{/if}}
+
+  </section>
+</form>

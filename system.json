@@ -1,0 +1,16 @@
+{
+  "id": "mecha-hack",
+  "title": "Mecha Hack",
+  "description": "A roll-under d20 mecha combat system.",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "authors": [{ "name": "Mecha Hack Developer" }],
+  "esmodules": ["mecha-hack.mjs"],
+  "styles": ["mecha-hack.css"],
+  "languages": [{ "lang": "en", "name": "English", "path": "lang/en.json" }],
+  "primaryTokenAttribute": "hitPoints",
+  "secondaryTokenAttribute": "armorPoints"
+}

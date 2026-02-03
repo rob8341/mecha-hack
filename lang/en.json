@@ -1,0 +1,13 @@
+{
+  "MECHA_HACK": {
+    "Stats": { "power": "Power", "mobility": "Mobility", "system": "System", "presence": "Presence" },
+    "Labels": {
+      "pilot": "Pilot", "callsign": "Callsign", "chassis": "Chassis", "level": "Level",
+      "armorPoints": "Armor Points", "hitPoints": "Hit Points",
+      "hitDie": "Hit Die", "damageDie": "Damage Die", "reactorDie": "Reactor Die",
+      "pilotAbility": "Pilot Ability", "chassisAbilities": "Chassis Abilities",
+      "equipment": "Equipment", "modules": "Modules"
+    },
+    "Rolls": { "success": "SUCCESS", "failure": "FAILURE", "target": "Target", "result": "Result" }
+  }
+}
