@@ -886,6 +886,7 @@
 .mecha-roll.success .result {
   color: var(--mecha-green);
   font-weight: bold;
+  font-size: 1.15em;
 }
 
 /* Failure state */
@@ -896,6 +897,7 @@
 .mecha-roll.failure .result {
   color: var(--mecha-red);
   font-weight: bold;
+  font-size: 1.15em;
 }
 
 /* Critical Success */
@@ -907,6 +909,7 @@
 .mecha-roll.critical-success .result {
   color: gold;
   font-weight: bold;
+  font-size: 1.15em;
   text-shadow: 0 0 8px gold;
 }
 
@@ -919,6 +922,7 @@
 .mecha-roll.critical-failure .result {
   color: #ff4444;
   font-weight: bold;
+  font-size: 1.15em;
   text-shadow: 0 0 8px #8b0000;
 }
 
@@ -1131,130 +1135,244 @@
 
 /* ============================================
    FOUNDRY CHAT MESSAGE STYLING
-   Only style the chat messages/cards, not the
-   sidebar background
+   Style chat message cards with larger fonts
    ============================================ */
 
-/* Chat message cards - consistent with actor sheet */
-#chat-log .chat-message {
-  background: var(--mecha-bg-light, #16213e);
-  color: var(--mecha-text, #e8e8e8);
-  border: 1px solid var(--mecha-border, #333);
-  border-left: 3px solid var(--mecha-cyan, #00d4ff);
-  border-radius: 4px;
-  margin-bottom: 8px;
+/* Chat message cards - fully styled container */
+#chat-log .chat-message,
+.chat-popout .chat-message {
+  background: var(--mecha-bg-light, #16213e) !important;
+  color: var(--mecha-text, #e8e8e8) !important;
+  border: 1px solid var(--mecha-border, #333) !important;
+  border-left: 3px solid var(--mecha-cyan, #00d4ff) !important;
+  border-radius: 4px !important;
+  margin-bottom: 8px !important;
+  overflow: hidden;
 }
 
-#chat-log .chat-message .message-header {
-  color: var(--mecha-text-dim, #888);
-  border-bottom: 1px solid var(--mecha-border, #333);
-  background: var(--mecha-bg, #1a1a2e);
-  padding: 6px 8px;
+/* Message header */
+#chat-log .chat-message .message-header,
+.chat-popout .chat-message .message-header {
+  color: var(--mecha-text-dim, #888) !important;
+  border-bottom: 1px solid var(--mecha-border, #333) !important;
+  background: var(--mecha-bg, #1a1a2e) !important;
+  padding: 6px 10px !important;
 }
 
-#chat-log .chat-message .message-header .message-sender {
-  color: var(--mecha-cyan, #00d4ff);
-  font-weight: bold;
+#chat-log .chat-message .message-header .message-sender,
+.chat-popout .chat-message .message-header .message-sender {
+  color: var(--mecha-cyan, #00d4ff) !important;
+  font-weight: bold !important;
 }
 
-#chat-log .chat-message .message-header .message-metadata {
-  color: var(--mecha-text-dim, #888);
+#chat-log .chat-message .message-header .message-metadata,
+.chat-popout .chat-message .message-header .message-metadata {
+  color: var(--mecha-text-dim, #888) !important;
 }
 
-#chat-log .chat-message .message-content {
-  color: var(--mecha-text, #e8e8e8);
-  padding: 8px;
-  background: var(--mecha-bg-light, #16213e);
+/* Message content - contains everything including dice */
+#chat-log .chat-message .message-content,
+.chat-popout .chat-message .message-content {
+  color: var(--mecha-text, #e8e8e8) !important;
+  padding: 10px !important;
+  background: var(--mecha-bg-light, #16213e) !important;
 }
 
-/* Dice roll styling in chat */
-#chat-log .chat-message .dice-roll {
-  background: var(--mecha-bg, #1a1a2e);
-  border: 1px solid var(--mecha-border, #333);
-  border-radius: 4px;
-  margin-top: 6px;
+/* Ensure all text in message content inherits color */
+#chat-log .chat-message .message-content *,
+.chat-popout .chat-message .message-content * {
+  color: inherit;
 }
 
-#chat-log .chat-message .dice-roll .dice-formula {
-  background: var(--mecha-accent, #0f3460);
-  color: var(--mecha-cyan, #00d4ff);
-  border-bottom: 1px solid var(--mecha-border, #333);
-  padding: 6px 10px;
-  font-weight: bold;
+/* Dice roll container - must be inside message-content */
+#chat-log .chat-message .dice-roll,
+.chat-popout .chat-message .dice-roll,
+.message-content .dice-roll {
+  background: var(--mecha-bg, #1a1a2e) !important;
+  border: 1px solid var(--mecha-border, #333) !important;
+  border-radius: 3px !important;
+  margin: 4px 0 !important;
+  overflow: hidden !important;
 }
 
-#chat-log .chat-message .dice-roll .dice-total {
-  color: var(--mecha-text, #e8e8e8);
-  font-weight: bold;
-  font-size: 1.2em;
-  padding: 8px 10px;
-  background: var(--mecha-bg-light, #16213e);
+/* Dice formula display */
+#chat-log .chat-message .dice-formula,
+.chat-popout .chat-message .dice-formula,
+.dice-roll .dice-formula {
+  background: var(--mecha-accent, #0f3460) !important;
+  color: var(--mecha-cyan, #00d4ff) !important;
+  border-bottom: 1px solid var(--mecha-border, #333) !important;
+  padding: 4px 8px !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  font-size: 0.85em !important;
 }
 
-#chat-log .chat-message .dice-roll .dice-total.success {
-  color: var(--mecha-green, #22c55e);
+/* Dice result section */
+#chat-log .chat-message .dice-result,
+.chat-popout .chat-message .dice-result,
+.dice-roll .dice-result {
+  background: var(--mecha-bg, #1a1a2e) !important;
+  padding: 4px !important;
 }
 
-#chat-log .chat-message .dice-roll .dice-total.failure {
-  color: var(--mecha-red, #e94560);
+/* Dice total - the big number */
+#chat-log .chat-message .dice-total,
+.chat-popout .chat-message .dice-total,
+.dice-roll .dice-total {
+  color: var(--mecha-text, #e8e8e8) !important;
+  font-weight: bold !important;
+  padding: 6px 8px !important;
+  background: var(--mecha-bg-light, #16213e) !important;
+  text-align: center !important;
 }
 
-/* Dice tooltip styling */
-#chat-log .chat-message .dice-roll .dice-tooltip {
-  background: var(--mecha-bg, #1a1a2e);
-  color: var(--mecha-text, #e8e8e8);
-  border: 1px solid var(--mecha-cyan, #00d4ff);
-  border-radius: 4px;
+.dice-roll .dice-total.success,
+#chat-log .dice-total.success {
+  color: var(--mecha-green, #22c55e) !important;
+  text-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
 }
 
-#chat-log .chat-message .dice-roll .dice-tooltip .part-header {
-  background: var(--mecha-accent, #0f3460);
-  color: var(--mecha-cyan, #00d4ff);
-  border-bottom: 1px solid var(--mecha-border, #333);
-  padding: 4px 8px;
+.dice-roll .dice-total.failure,
+#chat-log .dice-total.failure {
+  color: var(--mecha-red, #e94560) !important;
+  text-shadow: 0 0 8px rgba(233, 69, 96, 0.6);
 }
 
-#chat-log .chat-message .dice-roll .dice-tooltip .dice-rolls {
-  padding: 6px;
-  background: var(--mecha-bg, #1a1a2e);
+.dice-roll .dice-total.critical,
+#chat-log .dice-total.critical {
+  color: gold !important;
+  text-shadow: 0 0 12px gold;
 }
 
-#chat-log .chat-message .dice-roll .dice-tooltip .dice-rolls li {
-  background: var(--mecha-bg-light, #16213e);
-  border: 1px solid var(--mecha-border, #333);
-  color: var(--mecha-text, #e8e8e8);
-  padding: 4px 8px;
-  border-radius: 3px;
+/* Dice tooltip - expanded breakdown */
+#chat-log .chat-message .dice-tooltip,
+.chat-popout .chat-message .dice-tooltip,
+.dice-roll .dice-tooltip {
+  background: var(--mecha-bg, #1a1a2e) !important;
+  color: var(--mecha-text, #e8e8e8) !important;
+  border-top: 1px solid var(--mecha-border, #333) !important;
+  padding: 4px !important;
 }
 
-#chat-log .chat-message .dice-roll .dice-tooltip .dice-rolls li.max {
-  color: var(--mecha-green, #22c55e);
-  border-color: var(--mecha-green, #22c55e);
-  background: rgba(34, 197, 94, 0.1);
+.dice-tooltip .tooltip-part,
+.dice-tooltip .part-header {
+  color: var(--mecha-cyan, #00d4ff) !important;
+  background: var(--mecha-accent, #0f3460) !important;
+  padding: 2px 6px !important;
+  border-radius: 2px !important;
+  margin-bottom: 3px !important;
 }
 
-#chat-log .chat-message .dice-roll .dice-tooltip .dice-rolls li.min {
-  color: var(--mecha-red, #e94560);
-  border-color: var(--mecha-red, #e94560);
-  background: rgba(233, 69, 96, 0.1);
+.dice-tooltip .part-formula {
+  color: var(--mecha-text-dim, #888) !important;
 }
 
-#chat-log .chat-message .dice-roll .dice-tooltip .dice-rolls li.discarded {
-  opacity: 0.5;
-  text-decoration: line-through;
+.dice-tooltip .part-total {
+  color: var(--mecha-text, #e8e8e8) !important;
+  font-weight: bold !important;
 }
 
-/* Whisper and blind roll styling */
-#chat-log .chat-message.whisper {
-  background: linear-gradient(90deg, rgba(168, 85, 247, 0.15), var(--mecha-bg-light, #16213e));
-  border-left-color: var(--mecha-purple, #a855f7);
-  border-color: var(--mecha-purple, #a855f7);
+/* Individual dice display */
+.dice-tooltip .dice-rolls,
+.dice-tooltip .dice {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 4px !important;
+  padding: 3px 0 !important;
+  justify-content: center !important;
 }
 
-#chat-log .chat-message.blind {
-  background: linear-gradient(90deg, rgba(233, 69, 96, 0.15), var(--mecha-bg-light, #16213e));
-  border-left-color: var(--mecha-red, #e94560);
-  border-color: var(--mecha-red, #e94560);
+/* Each die result */
+.dice-tooltip .roll,
+.dice-tooltip .die,
+.dice-tooltip li,
+.dice-roll .die {
+  background: var(--mecha-accent, #0f3460) !important;
+  border: 1px solid var(--mecha-border, #333) !important;
+  border-radius: 3px !important;
+  padding: 2px 6px !important;
+  min-width: 22px !important;
+  text-align: center !important;
+  color: var(--mecha-text, #e8e8e8) !important;
+  font-weight: bold !important;
+  font-size: 0.8em !important;
+}
+
+/* Max roll - green glow */
+.dice-tooltip .roll.max,
+.dice-tooltip .die.max,
+.dice-tooltip li.max,
+.dice-roll .die.max {
+  background: rgba(34, 197, 94, 0.2) !important;
+  border-color: var(--mecha-green, #22c55e) !important;
+  color: var(--mecha-green, #22c55e) !important;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+}
+
+/* Min roll - red glow */
+.dice-tooltip .roll.min,
+.dice-tooltip .die.min,
+.dice-tooltip li.min,
+.dice-roll .die.min {
+  background: rgba(233, 69, 96, 0.2) !important;
+  border-color: var(--mecha-red, #e94560) !important;
+  color: var(--mecha-red, #e94560) !important;
+  box-shadow: 0 0 8px rgba(233, 69, 96, 0.5);
+}
+
+/* Discarded dice */
+.dice-tooltip .roll.discarded,
+.dice-tooltip .die.discarded,
+.dice-tooltip li.discarded,
+.dice-roll .die.discarded {
+  opacity: 0.4 !important;
+  text-decoration: line-through !important;
+}
+
+/* Roll flavor text */
+#chat-log .chat-message .flavor-text,
+.chat-popout .chat-message .flavor-text {
+  color: var(--mecha-text, #e8e8e8) !important;
+  background: var(--mecha-bg, #1a1a2e) !important;
+  padding: 8px 10px !important;
+  border-radius: 4px !important;
+  border-left: 3px solid var(--mecha-cyan, #00d4ff) !important;
+  margin-bottom: 8px !important;
+}
+
+/* Inline roll results */
+.inline-roll,
+a.inline-roll,
+#chat-log .inline-roll {
+  background: var(--mecha-accent, #0f3460) !important;
+  color: var(--mecha-cyan, #00d4ff) !important;
+  border: 1px solid var(--mecha-cyan, #00d4ff) !important;
+  border-radius: 3px !important;
+  padding: 2px 8px !important;
+  font-weight: bold !important;
+}
+
+.inline-roll:hover,
+a.inline-roll:hover,
+#chat-log .inline-roll:hover {
+  background: var(--mecha-cyan, #00d4ff) !important;
+  color: var(--mecha-bg, #1a1a2e) !important;
+  box-shadow: 0 0 8px var(--mecha-cyan, #00d4ff);
+}
+
+/* Whisper messages - purple tint */
+#chat-log .chat-message.whisper,
+.chat-popout .chat-message.whisper {
+  background: linear-gradient(90deg, rgba(168, 85, 247, 0.2), var(--mecha-bg-light, #16213e)) !important;
+  border-left-color: var(--mecha-purple, #a855f7) !important;
+}
+
+/* Blind roll messages - red tint */
+#chat-log .chat-message.blind,
+.chat-popout .chat-message.blind {
+  background: linear-gradient(90deg, rgba(233, 69, 96, 0.2), var(--mecha-bg-light, #16213e)) !important;
+  border-left-color: var(--mecha-red, #e94560) !important;
 }
 
 /* ============================================

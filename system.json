@@ -27,7 +27,7 @@
   "secondaryTokenAttribute": "armorPoints",
   "url": "https://github.com/rob8341/mecha-hack",
   "manifest": "https://github.com/rob8341/mecha-hack/releases/latest/download/system.json",
-  "download": "https://github.com/rob8341/mecha-hack/releases/latest/download/mecha-hack.zip",
+  "download": "https://github.com/rob8341/mecha-hack/releases/download/v0.1/mecha-hack.zip",
   "license": "MIT",
   "readme": "https://github.com/rob8341/mecha-hack/blob/main/README.md",
   "bugs": "https://github.com/rob8341/mecha-hack/issues",
