@@ -608,6 +608,14 @@ class MechaHackActorSheet extends ActorSheet {
       el.addEventListener("dragstart", this._onDragStart.bind(this));
     });
     
+    // Click on item name to open item sheet
+    html.find(".item-list .item .name").click(ev => {
+      ev.preventDefault();
+      const li = ev.currentTarget.closest(".item");
+      const item = this.actor.items.get(li.dataset.itemId);
+      if (item) item.sheet.render(true);
+    });
+    
     html.find(".stat-roll").click(async ev => {
       ev.preventDefault();
       const stat = ev.currentTarget.dataset.stat;
@@ -1023,6 +1031,14 @@ class MechaHackEnemySheet extends ActorSheet {
     html.find(".item-roll, .item-roll-attack, .item-roll-recharge-attack, .item-roll-recharge-die, .item-roll-boss-attack, .item-roll-boss-recharge-attack, .item-roll-boss-recharge-die").each((i, el) => {
       el.setAttribute("draggable", true);
       el.addEventListener("dragstart", this._onDragStart.bind(this));
+    });
+    
+    // Click on item name to open item sheet
+    html.find(".item-list .item .name").click(ev => {
+      ev.preventDefault();
+      const li = ev.currentTarget.closest(".item");
+      const item = this.actor.items.get(li.dataset.itemId);
+      if (item) item.sheet.render(true);
     });
     
     // Boss Mode toggle - post to chat when enabled
