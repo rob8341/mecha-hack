@@ -51,7 +51,7 @@ A roll-under d20 mecha combat system for Foundry VTT v13.
 3. Click **Install System**
 4. Paste this URL in "Manifest URL":
    ```
-   https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/mecha-hack/main/system.json
+   https://raw.githubusercontent.com/rob8341/mecha-hack/refs/heads/master/system.json
    ```
 5. Click **Install**
 
