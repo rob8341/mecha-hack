@@ -100,3 +100,4 @@ MIT License
 ## Credits
 
 Based on "The Mecha Hack" RPG system.
+Written with Claude Opus 4.5 AI
