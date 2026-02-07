@@ -1588,6 +1588,136 @@ new Dialog({
   return false; // Prevent default behavior
 });
 
+// Custom initiative for combat
+// Override the default initiative rolling behavior
+
+// Set enemy initiative to 0 when added to combat
+Hooks.on("preCreateCombatant", async (combatant, data, options, userId) => {
+  const actor = combatant.actor;
+  if (actor?.type === "enemy") {
+    combatant.updateSource({ initiative: 0 });
+  }
+});
+
+// Override the Combat.rollInitiative method to use our custom system
+Hooks.once("ready", () => {
+  // Store original method
+  const originalRollInitiative = CONFIG.Combat.documentClass.prototype.rollInitiative;
+  
+  // Override with custom method
+  CONFIG.Combat.documentClass.prototype.rollInitiative = async function(ids, options = {}) {
+    // Handle single ID or array
+    ids = typeof ids === "string" ? [ids] : ids;
+    
+    for (const id of ids) {
+      const combatant = this.combatants.get(id);
+      if (!combatant) continue;
+      
+      const actor = combatant.actor;
+      if (!actor) continue;
+      
+      // Enemy always gets initiative 0
+      if (actor.type === "enemy") {
+        await combatant.update({ initiative: 0 });
+        continue;
+      }
+      
+      // Mecha actors choose between Mobility or System
+      if (actor.type === "mecha") {
+        await showInitiativeDialog(combatant, actor);
+        continue;
+      }
+      
+      // Fallback to original for other types
+      await originalRollInitiative.call(this, [id], options);
+    }
+    
+    return this;
+  };
+});
+
+// Show initiative dialog for mecha actors
+async function showInitiativeDialog(combatant, actor) {
+  return new Promise((resolve) => {
+    new Dialog({
+      title: "Initiative Roll",
+      content: `
+        <p>Choose a stat to test for <strong>${actor.name}</strong>'s initiative:</p>
+        <p style="font-size: 0.9em; color: #aaa;">Success = Initiative 1 (act first)<br>Failure = Initiative -1 (act last)</p>
+      `,
+      buttons: {
+        mobility: {
+          icon: '<i class="fas fa-running"></i>',
+          label: `Mobility (${actor.system.stats.mobility.value})`,
+          callback: async () => {
+            await rollInitiativeTest(combatant, actor, "mobility");
+            resolve();
+          }
+        },
+        system: {
+          icon: '<i class="fas fa-cogs"></i>',
+          label: `System (${actor.system.stats.system.value})`,
+          callback: async () => {
+            await rollInitiativeTest(combatant, actor, "system");
+            resolve();
+          }
+        }
+      },
+      default: "mobility",
+      close: () => resolve()
+    }).render(true);
+  });
+}
+
+// Function to roll initiative test
+async function rollInitiativeTest(combatant, actor, statKey) {
+  const stat = actor.system.stats[statKey];
+  const statLabel = statKey === "mobility" ? "Mobility" : "System";
+  
+  const roll = await new Roll("1d20").evaluate();
+  const result = roll.total;
+  
+  // Check for criticals
+  const isCritSuccess = result === 1;
+  const isCritFailure = result === 20;
+  
+  // Success if roll is LOWER than target (fail on equal or higher)
+  let success = result < stat.value;
+  if (isCritSuccess) success = true;
+  if (isCritFailure) success = false;
+  
+  // Set initiative based on success/failure
+  const initiative = success ? 1 : -1;
+  await combatant.update({ initiative: initiative });
+  
+  // Build result text
+  let resultText = success ? "SUCCESS" : "FAILURE";
+  let critText = "";
+  let critClass = "";
+  
+  if (isCritSuccess) {
+    critText = " — CRITICAL!";
+    critClass = " critical-success";
+  } else if (isCritFailure) {
+    critText = " — CRITICAL FAILURE!";
+    critClass = " critical-failure";
+  }
+  
+  // Post to chat
+  await roll.toMessage({
+    speaker: ChatMessage.getSpeaker({ actor: actor }),
+    flavor: `
+      <div class="mecha-roll initiative-roll ${success ? 'success' : 'failure'}${critClass}">
+        <strong><i class="fas fa-flag-checkered"></i> Initiative Test</strong> (${statLabel})<br>
+        Target: ${stat.value} | Roll: ${result}<br>
+        <span class="result">${resultText}${critText}</span><br>
+        <span class="initiative-result" style="font-size: 1.1em; margin-top: 4px; display: block;">
+          Initiative: <strong style="color: ${success ? 'var(--mecha-green, #22c55e)' : 'var(--mecha-red, #e94560)'};">${initiative}</strong>
+        </span>
+      </div>`
+  });
+}
+
 // Roll hit dice for enemy tokens when created
 Hooks.on("createToken", async (token, options, userId) => {
   // Only run for the user who created the token

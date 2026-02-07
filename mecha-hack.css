@@ -2147,3 +2147,38 @@ a.inline-roll:hover,
   background: var(--mecha-cyan, #00d4ff);
   color: var(--mecha-bg, #1a1a2e);
 }
+
+/* ============================================
+   INITIATIVE ROLL STYLING
+   ============================================ */
+
+/* Initiative Roll */
+.mecha-roll.initiative-roll {
+  border-left-color: var(--mecha-purple, #a855f7);
+}
+
+.mecha-roll.initiative-roll strong {
+  color: var(--mecha-purple, #a855f7);
+}
+
+.mecha-roll.initiative-roll.success {
+  border-left-color: var(--mecha-green, #22c55e);
+}
+
+.mecha-roll.initiative-roll.success strong {
+  color: var(--mecha-green, #22c55e);
+}
+
+.mecha-roll.initiative-roll.failure {
+  border-left-color: var(--mecha-red, #e94560);
+}
+
+.mecha-roll.initiative-roll.failure strong {
+  color: var(--mecha-red, #e94560);
+}
+
+.initiative-result {
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
