@@ -64,7 +64,7 @@ This is an **unofficial, fan-made** implementation for Foundry VTT. This system 
 3. Click **Install System**
 4. Paste this URL in "Manifest URL":
    ```
-   https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/mecha-hack/main/system.json
+   https://raw.githubusercontent.com/rob8341/mecha-hack/refs/heads/master/system.json
    ```
 5. Click **Install**
 
@@ -128,7 +128,7 @@ This Foundry VTT system code is released under the MIT License.
 - **Based on**: The Black Hack by David Black
 
 ### Foundry VTT System
-- **System Developer**: Mecha Hack Developer
+- **System Developer**: rob8341 & Claude Opus 4.5
 
 ---
 
