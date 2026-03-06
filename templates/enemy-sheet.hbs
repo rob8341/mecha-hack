@@ -5,10 +5,6 @@
       <div class="callsign-row">
         <label>Name</label>
         <input class="callsign-input enemy-name" name="name" type="text" value="{{actor.name}}" placeholder="Enemy Name" />
-        <div class="boss-field">
-          <label>Boss Mode</label>
-          <input type="checkbox" name="system.boss" {{#if system.boss}}checked{{/if}} />
-        </div>
       </div>
       <div class="enemy-stats-row">
         <div class="enemy-stat-field hit-dice-field">
@@ -30,6 +26,10 @@
             <span class="health-divider">/</span>
             <input type="number" name="system.armorPoints.max" value="{{system.armorPoints.max}}" min="0" />
           </div>
+        </div>
+        <div class="boss-field">
+          <label>Boss Mode</label>
+          <input type="checkbox" name="system.boss" {{#if system.boss}}checked{{/if}} />
         </div>
       </div>
     </div>
@@ -115,63 +115,71 @@
       </ul>
     </div>
 
-    <div class="boss-info-block {{#unless system.boss}}boss-disabled{{/unless}}">
-      <div class="boss-info-title"><i class="fas fa-crown"></i> BOSS Class Enemies</div>
-      <ul class="boss-info-list">
-        <li>2 turns per moment</li>
-        <li>AP = 2x number of players</li>
-        <li>At 50% HP, damage die increases one step (Toggle Boss Mode)</li>
-      </ul>
-    </div>
-
-    <div class="item-section boss-attacks {{#unless system.boss}}boss-disabled{{/unless}}">
-      <div class="item-header">
-        <h3><i class="fas fa-crown"></i> Boss Attacks</h3>
-        <a class="item-create" data-type="bossAttack"><i class="fas fa-plus"></i> Add</a>
+    <div class="boss-section-wrapper">
+      <div class="boss-section-toggle {{#if bossExpanded}}active{{/if}}">
+        <i class="fas fa-chevron-right toggle-icon"></i>
+        <span class="toggle-title"><i class="fas fa-crown"></i> Boss Section</span>
       </div>
-      <ul class="item-list">
-        {{#each bossAttacks}}
-        <li class="item" data-item-id="{{this._id}}">
-          <img src="{{this.img}}" width="24" height="24" />
-          <span class="name">{{this.name}}</span>
-          <span class="detail attack-damage">{{this.system.damage}}</span>
-          <span class="detail attack-range-{{this.system.attackRange}}">{{this.system.attackRange}}</span>
-          <div class="controls">
-            <a class="item-roll-boss-attack" title="Roll Attack" draggable="true"><i class="fas fa-dice-d20"></i></a>
-            <a class="item-edit" title="Edit"><i class="fas fa-edit"></i></a>
-            <a class="item-delete-confirm" title="Delete"><i class="fas fa-trash"></i></a>
-          </div>
-        </li>
-        {{else}}
-        <li class="item item-empty"><span class="empty-slot">No boss attacks</span></li>
-        {{/each}}
-      </ul>
-    </div>
+      <div class="boss-section-content {{#if bossExpanded}}expanded{{/if}}">
+        <div class="boss-info-block">
+          <div class="boss-info-title"><i class="fas fa-crown"></i> BOSS Class Enemies</div>
+          <ul class="boss-info-list">
+            <li>2 turns per moment</li>
+            <li>AP = 2x number of players</li>
+            <li>At 50% HP, damage die increases one step (Toggle Boss Mode)</li>
+          </ul>
+        </div>
 
-    <div class="item-section boss-recharge-attacks {{#unless system.boss}}boss-disabled{{/unless}}">
-      <div class="item-header">
-        <h3><i class="fas fa-crown"></i> Boss Recharge Attacks</h3>
-        <a class="item-create" data-type="bossRechargeAttack"><i class="fas fa-plus"></i> Add</a>
-      </div>
-      <ul class="item-list">
-        {{#each bossRechargeAttacks}}
-        <li class="item" data-item-id="{{this._id}}">
-          <input type="checkbox" class="boss-recharge-ready" {{#if this.system.ready}}checked{{/if}} title="Ready" />
-          <img src="{{this.img}}" width="24" height="24" />
-          <span class="name">{{this.name}}</span>
-          <span class="detail attack-damage">{{this.system.damage}}</span>
-          <span class="detail attack-range-{{this.system.attackRange}}">{{this.system.attackRange}}</span>
-          <div class="controls">
-            <a class="item-roll-boss-recharge-die" title="Roll Recharge Die" draggable="true"><i class="fas fa-sync-alt"></i></a>
-            <a class="item-roll-boss-recharge-attack" title="Roll Attack" draggable="true"><i class="fas fa-dice-d20"></i></a>
-            <a class="item-edit" title="Edit"><i class="fas fa-edit"></i></a>
-            <a class="item-delete-confirm" title="Delete"><i class="fas fa-trash"></i></a>
+        <div class="item-section boss-attacks {{#unless system.boss}}boss-disabled{{/unless}}">
+          <div class="item-header">
+            <h3><i class="fas fa-crown"></i> Boss Attacks</h3>
+            <a class="item-create" data-type="bossAttack"><i class="fas fa-plus"></i> Add</a>
           </div>
-        </li>
-        {{else}}
-        <li class="item item-empty"><span class="empty-slot">No boss recharge attacks</span></li>
-        {{/each}}
-      </ul>
+          <ul class="item-list">
+            {{#each bossAttacks}}
+            <li class="item" data-item-id="{{this._id}}">
+              <img src="{{this.img}}" width="24" height="24" />
+              <span class="name">{{this.name}}</span>
+              <span class="detail attack-damage">{{this.system.damage}}</span>
+              <span class="detail attack-range-{{this.system.attackRange}}">{{this.system.attackRange}}</span>
+              <div class="controls">
+                <a class="item-roll-boss-attack" title="Roll Attack" draggable="true"><i class="fas fa-dice-d20"></i></a>
+                <a class="item-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                <a class="item-delete-confirm" title="Delete"><i class="fas fa-trash"></i></a>
+              </div>
+            </li>
+            {{else}}
+            <li class="item item-empty"><span class="empty-slot">No boss attacks</span></li>
+            {{/each}}
+          </ul>
+        </div>
+
+        <div class="item-section boss-recharge-attacks {{#unless system.boss}}boss-disabled{{/unless}}">
+          <div class="item-header">
+            <h3><i class="fas fa-crown"></i> Boss Recharge Attacks</h3>
+            <a class="item-create" data-type="bossRechargeAttack"><i class="fas fa-plus"></i> Add</a>
+          </div>
+          <ul class="item-list">
+            {{#each bossRechargeAttacks}}
+            <li class="item" data-item-id="{{this._id}}">
+              <input type="checkbox" class="boss-recharge-ready" {{#if this.system.ready}}checked{{/if}} title="Ready" />
+              <img src="{{this.img}}" width="24" height="24" />
+              <span class="name">{{this.name}}</span>
+              <span class="detail attack-damage">{{this.system.damage}}</span>
+              <span class="detail attack-range-{{this.system.attackRange}}">{{this.system.attackRange}}</span>
+              <div class="controls">
+                <a class="item-roll-boss-recharge-die" title="Roll Recharge Die" draggable="true"><i class="fas fa-sync-alt"></i></a>
+                <a class="item-roll-boss-recharge-attack" title="Roll Attack" draggable="true"><i class="fas fa-dice-d20"></i></a>
+                <a class="item-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                <a class="item-delete-confirm" title="Delete"><i class="fas fa-trash"></i></a>
+              </div>
+            </li>
+            {{else}}
+            <li class="item item-empty"><span class="empty-slot">No boss recharge attacks</span></li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
     </div>
 
   </section>

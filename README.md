@@ -1,9 +1,20 @@
-# Mecha Hack - Foundry VTT System
+# The Mecha Hack - Foundry VTT System
 
-A roll-under d20 mecha combat system for Foundry VTT v13.
+An unofficial Foundry VTT v13 implementation of **The Mecha Hack**, a roll-under d20 mecha combat RPG.
 
 ![Foundry v13](https://img.shields.io/badge/Foundry-v13-green)
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
+
+## ⚠️ Disclaimer
+
+This is an **unofficial, fan-made** implementation for Foundry VTT. This system requires ownership of **The Mecha Hack** rulebook to play.
+
+**The Mecha Hack** is published by **[Absolute Tabletop](https://absolutetabletop.com/)**. Please support the official release by purchasing the game.
+
+- [The Mecha Hack on DriveThruRPG](https://www.drivethrurpg.com/product/218665/The-Mecha-Hack)
+- [Absolute Tabletop Website](https://absolutetabletop.com/)
+
+---
 
 ## Features
 
@@ -31,9 +42,9 @@ A roll-under d20 mecha combat system for Foundry VTT v13.
   - Enemies always act at Initiative 0
 
 ### Roll Mechanics
-- **Roll-Under**: Roll d20 under your stat value
-- **Critical Success**: Natural 1
-- **Critical Failure**: Natural 20
+- **Roll-Under**: Roll d20 under your stat value (equal fails)
+- **Critical Success**: Natural 1 (always succeeds)
+- **Critical Failure**: Natural 20 (always fails)
 - **Advantage**: Roll 2d20, keep lowest
 - **Disadvantage**: Roll 2d20, keep highest
 - **Modifiers**: Add +/- to your roll
@@ -42,6 +53,8 @@ A roll-under d20 mecha combat system for Foundry VTT v13.
 - Roll 1-2 on Reactor Die → Die degrades one step
 - d20 → d12 → d10 → d8 → d6 → d4
 - At d4, rolling 1-2 causes "Reactor Overheated!"
+
+---
 
 ## Installation
 
@@ -60,6 +73,8 @@ A roll-under d20 mecha combat system for Foundry VTT v13.
 2. Extract to `Data/systems/mecha-hack/`
 3. Restart Foundry VTT
 
+---
+
 ## File Structure
 
 ```
@@ -75,6 +90,8 @@ mecha-hack/
     ├── enemy-sheet.hbs
     └── item-sheet.hbs
 ```
+
+---
 
 ## Item Types
 
@@ -93,10 +110,32 @@ mecha-hack/
 | Boss Attack | Boss-only attacks |
 | Boss Recharge Attack | Boss-only recharge attacks |
 
+---
+
 ## License
 
-MIT License
+This Foundry VTT system code is released under the MIT License.
 
-## Credits
+**Note**: This license applies only to the code in this repository. The Mecha Hack game content, rules, and intellectual property are owned by Absolute Tabletop and are not covered by this license.
 
-Based on "The Mecha Hack" RPG system.
+---
+
+## Credits & Acknowledgments
+
+### The Mecha Hack
+- **Publisher**: [Absolute Tabletop](https://absolutetabletop.com/)
+- **Game Design**: The Mecha Hack Team
+- **Based on**: The Black Hack by David Black
+
+### Foundry VTT System
+- **System Developer**: Mecha Hack Developer
+
+---
+
+## Support the Publisher
+
+If you enjoy this system, please support the creators by purchasing the official game:
+
+🎮 **[Buy The Mecha Hack](https://www.drivethrurpg.com/product/218665/The-Mecha-Hack)**
+
+🌐 **[Absolute Tabletop](https://absolutetabletop.com/)**

@@ -78,14 +78,39 @@ class MechaHackActor extends Actor {
       rollDisplay = `${modifiedRoll} (${result} ${modSign}${modifier})`;
     }
     
-    await roll.toMessage({
+    // Build dice display showing all rolled dice
+    let diceHtml = "";
+    if (mode === "advantage" || mode === "disadvantage") {
+      const dice = roll.dice[0].results;
+      diceHtml = `<div class="roll-dice-display">`;
+      for (const die of dice) {
+        const discardedClass = die.discarded ? " discarded" : "";
+        const keptClass = !die.discarded ? " kept" : "";
+        const critClass = die.result === 1 ? " crit-success" : (die.result === 20 ? " crit-fail" : "");
+        diceHtml += `<span class="roll-die${discardedClass}${keptClass}${critClass}">${die.result}</span>`;
+      }
+      diceHtml += `</div>`;
+    } else {
+      const critDieClass = result === 1 ? " crit-success" : (result === 20 ? " crit-fail" : "");
+      diceHtml = `<div class="roll-dice-display"><span class="roll-die kept${critDieClass}">${result}</span></div>`;
+    }
+    
+    // Build the new chat card
+    let flavorHtml = `<div class="mecha-roll stat-check ${success ? 'success' : 'failure'}${critClass}">`;
+    flavorHtml += `<div class="roll-header"><strong><i class="fas fa-dice-d20"></i> ${STATS[statKey]} Check</strong> <span class="roll-mode">${modeLabel}</span></div>`;
+    flavorHtml += diceHtml;
+    flavorHtml += `<div class="roll-target">Target: <strong>${stat.value}</strong></div>`;
+    if (modifier !== 0) {
+      const modSign = modifier > 0 ? "+" : "";
+      flavorHtml += `<div class="roll-modifier-display">Modifier: <strong>${modSign}${modifier}</strong> → Final: <strong>${modifiedRoll}</strong></div>`;
+    }
+    flavorHtml += `<div class="roll-result"><span class="result-text">${resultText}${critText}</span></div>`;
+    flavorHtml += `</div>`;
+    
+    await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      flavor: `
-        <div class="mecha-roll ${success ? 'success' : 'failure'}${critClass}">
-          <strong>${STATS[statKey]} Check</strong> (${modeLabel})<br>
-          Target: ${stat.value} | Roll: ${rollDisplay}<br>
-          <span class="result">${resultText}${critText}</span>
-        </div>`
+      content: flavorHtml,
+      rolls: [roll]
     });
   }
 
@@ -131,7 +156,7 @@ class MechaHackActor extends Actor {
         if (currentIndex < degradeOrder.length - 1) {
           const newDie = degradeOrder[currentIndex + 1];
           await this.update({ "system.dice.reactor": newDie });
-          extraMessage = `<br><span class="reactor-degrade">⚠ REACTOR DEGRADED: ${dieSize.toUpperCase()} → ${newDie.toUpperCase()}</span>`;
+          extraMessage = `<br><span class="reactor-degrade"><span class="degrade-label">⚠ REACTOR DEGRADED</span><span class="degrade-dice">${dieSize.toUpperCase()} → ${newDie.toUpperCase()}</span></span>`;
         } else {
           // Already at d4 and rolled 1 or 2
           extraMessage = `<br><span class="reactor-overheat">🔥 REACTOR OVERHEATED!</span>`;
@@ -152,40 +177,68 @@ class MechaHackActor extends Actor {
       
       await this.update({ "system.hitPoints.value": newHP });
       
-      extraMessage = `<br><span class="heal-result">💚 Healed ${actualHeal} HP (${currentHP} → ${newHP})</span>`;
+      let healHtml = `<div class="mecha-roll die-roll heal-roll">`;
+      healHtml += `<div class="roll-header"><strong><i class="fas fa-heart"></i> ${labels[dieKey]}</strong> <span class="roll-mode">Heal Roll</span></div>`;
+      healHtml += `<div class="roll-dice-display"><span class="roll-die die-hit kept">${roll.total}</span></div>`;
+      healHtml += `<div class="die-size">${dieSize.toUpperCase()}</div>`;
+      healHtml += `<div class="roll-result heal-result">💚 Healed ${actualHeal} HP (${currentHP} → ${newHP})</div>`;
+      healHtml += `</div>`;
       
-      await roll.toMessage({
+      await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this }),
-        flavor: `<div class="mecha-roll heal-roll"><strong>${labels[dieKey]}</strong> (${dieSize.toUpperCase()}) — Heal Roll${extraMessage}</div>`
+        content: healHtml,
+        rolls: [roll]
       });
       return;
     }
     
     // Damage roll with modifiers
     if (dieKey === "damage") {
-      let damageDisplay = `${total}`;
-      let damageCalc = "";
+      let damageHtml = `<div class="mecha-roll die-roll damage-roll">`;
+      damageHtml += `<div class="roll-header"><strong><i class="fas fa-burst"></i> ${labels[dieKey]}</strong>`;
+      if (modeLabel) damageHtml += ` <span class="roll-mode">${modeLabel.replace(' — ', '')}</span>`;
+      if (doubleDamage) damageHtml += ` <span class="roll-mode double">DOUBLE</span>`;
+      damageHtml += `</div>`;
+      damageHtml += `<div class="roll-dice-display"><span class="roll-die die-damage kept">${roll.total}</span></div>`;
+      damageHtml += `<div class="die-size">${dieSize.toUpperCase()}</div>`;
       
+      // Show calculation if there are modifiers
+      let calcText = "";
       if (damageBonus > 0 && doubleDamage) {
-        damageCalc = ` <span style="color: var(--mecha-text-dim, #888);">((${roll.total} + ${damageBonus}) × 2)</span>`;
+        calcText = `(${roll.total} + ${damageBonus}) × 2`;
       } else if (damageBonus > 0) {
-        damageCalc = ` <span style="color: var(--mecha-text-dim, #888);">(${roll.total} + ${damageBonus})</span>`;
+        calcText = `${roll.total} + ${damageBonus}`;
       } else if (doubleDamage) {
-        damageCalc = ` <span style="color: var(--mecha-text-dim, #888);">(${roll.total} × 2)</span>`;
+        calcText = `${roll.total} × 2`;
       }
       
-      let doubleLabel = doubleDamage ? ' <span style="color: var(--mecha-red, #e94560);">[DOUBLE]</span>' : '';
+      damageHtml += `<div class="roll-result damage-result"><span class="damage-total">${total}</span><span class="damage-label">damage</span>`;
+      if (calcText) damageHtml += `<span class="damage-calc">${calcText}</span>`;
+      damageHtml += `</div>`;
+      damageHtml += `</div>`;
       
-      await roll.toMessage({
+      await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this }),
-        flavor: `<div class="mecha-roll damage-roll"><strong>${labels[dieKey]}</strong> (${dieSize.toUpperCase()})${modeLabel}${doubleLabel}<br><span class="damage-total" style="font-size: 1.3em; font-weight: bold; color: var(--mecha-yellow, #f0c040);">${damageDisplay} damage</span>${damageCalc}</div>`
+        content: damageHtml,
+        rolls: [roll]
       });
       return;
     }
     
-    await roll.toMessage({
+    // Build die roll chat card
+    let dieHtml = `<div class="mecha-roll die-roll ${dieKey}-roll">`;
+    dieHtml += `<div class="roll-header"><strong><i class="fas fa-dice"></i> ${labels[dieKey]}</strong></div>`;
+    dieHtml += `<div class="roll-dice-display"><span class="roll-die die-${dieKey} kept">${roll.total}</span></div>`;
+    dieHtml += `<div class="die-size">${dieSize.toUpperCase()}</div>`;
+    if (extraMessage) {
+      dieHtml += `<div class="roll-extra">${extraMessage.replace('<br>', '')}</div>`;
+    }
+    dieHtml += `</div>`;
+    
+    await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      flavor: `<div class="mecha-roll"><strong>${labels[dieKey]}</strong> (${dieSize.toUpperCase()})${extraMessage}</div>`
+      content: dieHtml,
+      rolls: [roll]
     });
   }
 }
@@ -247,9 +300,10 @@ class MechaHackItem extends Item {
       await this.update({ "system.ready": false });
     }
     
-    await roll.toMessage({
+    await ChatMessage.create({
       speaker: speaker,
-      flavor: content
+      content: content,
+      rolls: [roll]
     });
   }
   
@@ -283,9 +337,10 @@ class MechaHackItem extends Item {
     
     content += `</div>`;
     
-    await roll.toMessage({
+    await ChatMessage.create({
       speaker: speaker,
-      flavor: content
+      content: content,
+      rolls: [roll]
     });
   }
   
@@ -958,8 +1013,8 @@ class MechaHackEnemySheet extends ActorSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["mecha-hack", "sheet", "actor", "enemy-sheet"],
-      width: 700,
-      height: 1000,
+      width: 650,
+      height: 650,
       resizable: true,
       scrollY: [".sheet-body"]
     });
@@ -1020,6 +1075,9 @@ class MechaHackEnemySheet extends ActorSheet {
     context.bossAttacks = this.actor.items.filter(i => i.type === "bossAttack");
     context.bossRechargeAttacks = this.actor.items.filter(i => i.type === "bossRechargeAttack");
     
+    // Preserve boss section expanded state
+    context.bossExpanded = this._bossExpanded || actorData.system.boss;
+    
     return context;
   }
 
@@ -1041,16 +1099,32 @@ class MechaHackEnemySheet extends ActorSheet {
       if (item) item.sheet.render(true);
     });
     
-    // Boss Mode toggle - post to chat when enabled
+    // Boss Mode toggle - post to chat when enabled and expand boss section
     html.find("input[name='system.boss']").change(async ev => {
       const isChecked = ev.currentTarget.checked;
       if (isChecked) {
+        // Expand boss section and save state
+        html.find(".boss-section-toggle").addClass("active");
+        html.find(".boss-section-content").addClass("expanded");
+        this._bossExpanded = true;
+        
         const speaker = ChatMessage.getSpeaker({ actor: this.actor });
         await ChatMessage.create({
           speaker: speaker,
           content: `<div class="mecha-roll boss-mode-roll"><strong><i class="fas fa-skull"></i> ${this.actor.name}</strong> has engaged <span class="boss-mode-text">BOSS MODE!</span></div>`
         });
       }
+    });
+    
+    // Boss section collapse/expand toggle
+    html.find(".boss-section-toggle").click(ev => {
+      ev.preventDefault();
+      const toggle = $(ev.currentTarget);
+      const content = toggle.next(".boss-section-content");
+      toggle.toggleClass("active");
+      content.toggleClass("expanded");
+      // Save expanded state
+      this._bossExpanded = content.hasClass("expanded");
     });
     
     // Link to chat
@@ -1704,17 +1778,19 @@ async function rollInitiativeTest(combatant, actor, statKey) {
   }
   
   // Post to chat
-  await roll.toMessage({
+  await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor: actor }),
-    flavor: `
+    content: `
       <div class="mecha-roll initiative-roll ${success ? 'success' : 'failure'}${critClass}">
         <strong><i class="fas fa-flag-checkered"></i> Initiative Test</strong> (${statLabel})<br>
-        Target: ${stat.value} | Roll: ${result}<br>
+        <div class="roll-dice-display"><span class="roll-die kept">${result}</span></div>
+        Target: ${stat.value}<br>
         <span class="result">${resultText}${critText}</span><br>
         <span class="initiative-result" style="font-size: 1.1em; margin-top: 4px; display: block;">
           Initiative: <strong style="color: ${success ? 'var(--mecha-green, #22c55e)' : 'var(--mecha-red, #e94560)'};">${initiative}</strong>
         </span>
-      </div>`
+      </div>`,
+    rolls: [roll]
   });
 }
 

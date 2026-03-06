@@ -870,16 +870,16 @@
 }
 
 /* ============================================
-   CHAT ROLL MESSAGES
+   CHAT ROLL MESSAGES - REDESIGNED
    ============================================ */
 
 .mecha-roll {
-  padding: 10px 12px;
-  border-radius: 4px;
+  padding: 12px 14px;
+  border-radius: 6px;
   background: var(--mecha-bg-light);
-  border-left: 3px solid var(--mecha-cyan);
+  border-left: 4px solid var(--mecha-cyan);
   font-family: inherit;
-  font-size: 1.05em;
+  font-size: 1.1em;
   color: var(--mecha-text);
 }
 
@@ -887,15 +887,245 @@
   color: var(--mecha-cyan);
 }
 
+/* Roll header with icon and mode */
+.mecha-roll .roll-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-size: 1.1em;
+}
+
+.mecha-roll .roll-header i {
+  font-size: 1.2em;
+}
+
+.mecha-roll .roll-mode {
+  font-size: 0.55em;
+  padding: 1px 5px;
+  background: var(--mecha-accent);
+  border-radius: 3px;
+  color: var(--mecha-text-dim);
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.mecha-roll .roll-mode.double {
+  background: rgba(233, 69, 96, 0.2);
+  color: var(--mecha-red);
+  border: 1px solid var(--mecha-red);
+}
+
+/* Dice display frame */
+.mecha-roll .roll-dice-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  margin: 8px 0;
+}
+
+.mecha-roll .roll-die {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  height: 48px;
+  font-size: 1.6em;
+  font-weight: bold;
+  background: var(--mecha-accent);
+  border: 2px solid var(--mecha-cyan);
+  border-radius: 8px;
+  color: var(--mecha-text);
+}
+
+.mecha-roll .roll-die.kept {
+  background: var(--mecha-accent);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+}
+
+.mecha-roll .roll-die.discarded {
+  opacity: 0.4;
+  text-decoration: line-through;
+  border-color: var(--mecha-text-dim);
+  box-shadow: none;
+}
+
+.mecha-roll .roll-die.crit-success {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: var(--mecha-green);
+  color: var(--mecha-green);
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+}
+
+.mecha-roll .roll-die.crit-fail {
+  background: rgba(233, 69, 96, 0.2);
+  border-color: var(--mecha-red);
+  color: var(--mecha-red);
+  box-shadow: 0 0 15px rgba(233, 69, 96, 0.5);
+}
+
+/* Die type specific colors */
+.mecha-roll .roll-die.die-hit {
+  border-color: var(--mecha-red);
+  box-shadow: 0 0 12px rgba(233, 69, 96, 0.4);
+}
+
+.mecha-roll .roll-die.die-damage {
+  border-color: var(--mecha-yellow);
+  box-shadow: 0 0 12px rgba(240, 192, 64, 0.4);
+}
+
+.mecha-roll .roll-die.die-reactor {
+  border-color: var(--mecha-purple);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
+}
+
+/* Die size label */
+.mecha-roll .die-size {
+  text-align: center;
+  font-size: 0.85em;
+  color: var(--mecha-text-dim);
+  margin: -6px 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Roll target display */
+.mecha-roll .roll-target {
+  text-align: center;
+  font-size: 1em;
+  color: var(--mecha-text-dim);
+  margin-bottom: 6px;
+}
+
+.mecha-roll .roll-target strong {
+  color: var(--mecha-cyan);
+  font-size: 1.1em;
+}
+
+/* Roll modifier display */
+.mecha-roll .roll-modifier-display {
+  text-align: center;
+  font-size: 0.9em;
+  color: var(--mecha-text-dim);
+  margin-bottom: 8px;
+}
+
+.mecha-roll .roll-modifier-display strong {
+  color: var(--mecha-yellow);
+}
+
+/* Roll result - the final verdict */
+.mecha-roll .roll-result {
+  text-align: center;
+  padding: 10px 14px;
+  background: var(--mecha-bg);
+  border-radius: 6px;
+  margin-top: 10px;
+}
+
+.mecha-roll .roll-result .result-text {
+  font-size: 1.3em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Roll extra info (reactor states, etc) */
+.mecha-roll .roll-extra {
+  margin-top: 8px;
+}
+
+/* Die roll specific styling */
+.mecha-roll.die-roll .roll-header strong {
+  font-size: 1em;
+}
+
+.mecha-roll.hit-roll {
+  border-left-color: var(--mecha-red);
+}
+
+.mecha-roll.hit-roll .roll-header strong {
+  color: var(--mecha-red);
+}
+
+.mecha-roll.damage-roll {
+  border-left-color: var(--mecha-yellow);
+}
+
+.mecha-roll.damage-roll .roll-header strong {
+  color: var(--mecha-yellow);
+}
+
+.mecha-roll.reactor-roll {
+  border-left-color: var(--mecha-purple);
+}
+
+.mecha-roll.reactor-roll .roll-header strong {
+  color: var(--mecha-purple);
+}
+
+/* Damage result styling */
+.mecha-roll .damage-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.mecha-roll .damage-result .damage-total {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: var(--mecha-yellow);
+  text-shadow: 0 0 10px rgba(240, 192, 64, 0.5);
+}
+
+.mecha-roll .damage-result .damage-label {
+  font-size: 0.9em;
+  color: var(--mecha-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.mecha-roll .damage-result .damage-calc {
+  font-size: 0.85em;
+  color: var(--mecha-text-dim);
+  font-style: italic;
+}
+
+/* Stat check styling */
+.mecha-roll.stat-check {
+  border-left-color: var(--mecha-cyan);
+}
+
+.mecha-roll.stat-check .roll-header strong {
+  color: var(--mecha-cyan);
+}
+
+.mecha-roll.stat-check .roll-die {
+  border-color: var(--mecha-cyan);
+}
+
 /* Success state */
 .mecha-roll.success {
   border-left-color: var(--mecha-green);
 }
 
-.mecha-roll.success .result {
+.mecha-roll.success .roll-result {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid var(--mecha-green);
+}
+
+.mecha-roll.success .result-text {
   color: var(--mecha-green);
-  font-weight: bold;
-  font-size: 1.15em;
+  text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
 }
 
 /* Failure state */
@@ -903,36 +1133,52 @@
   border-left-color: var(--mecha-red);
 }
 
-.mecha-roll.failure .result {
+.mecha-roll.failure .roll-result {
+  background: rgba(233, 69, 96, 0.1);
+  border: 1px solid var(--mecha-red);
+}
+
+.mecha-roll.failure .result-text {
   color: var(--mecha-red);
-  font-weight: bold;
-  font-size: 1.15em;
+  text-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
 }
 
 /* Critical Success */
 .mecha-roll.critical-success {
   border-left-color: gold;
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.15), var(--mecha-bg-light));
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), var(--mecha-bg-light));
 }
 
-.mecha-roll.critical-success .result {
+.mecha-roll.critical-success .roll-result {
+  background: rgba(255, 215, 0, 0.15);
+  border: 2px solid gold;
+}
+
+.mecha-roll.critical-success .result-text {
   color: gold;
-  font-weight: bold;
-  font-size: 1.15em;
-  text-shadow: 0 0 8px gold;
+  text-shadow: 0 0 12px gold;
+  animation: crit-glow 1s ease-in-out 2;
+}
+
+@keyframes crit-glow {
+  0%, 100% { text-shadow: 0 0 12px gold; }
+  50% { text-shadow: 0 0 20px gold, 0 0 30px gold; }
 }
 
 /* Critical Failure */
 .mecha-roll.critical-failure {
   border-left-color: #8b0000;
-  background: linear-gradient(90deg, rgba(139, 0, 0, 0.2), var(--mecha-bg-light));
+  background: linear-gradient(90deg, rgba(139, 0, 0, 0.15), var(--mecha-bg-light));
 }
 
-.mecha-roll.critical-failure .result {
+.mecha-roll.critical-failure .roll-result {
+  background: rgba(139, 0, 0, 0.2);
+  border: 2px solid #8b0000;
+}
+
+.mecha-roll.critical-failure .result-text {
   color: #ff4444;
-  font-weight: bold;
-  font-size: 1.15em;
-  text-shadow: 0 0 8px #8b0000;
+  text-shadow: 0 0 12px #8b0000;
 }
 
 /* Weapon roll styling */
@@ -1009,34 +1255,52 @@
   color: var(--mecha-cyan);
 }
 
-/* Reactor states */
-.reactor-degrade {
+/* Reactor states in roll-extra */
+.mecha-roll .roll-extra .reactor-degrade {
   color: var(--mecha-purple);
   font-weight: bold;
   display: block;
-  margin-top: 6px;
-  padding: 6px 8px;
+  padding: 10px 12px;
   background: rgba(168, 85, 247, 0.15);
-  border-radius: 4px;
-  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 6px;
+  border: 1px solid var(--mecha-purple);
+  text-align: center;
+  font-size: 1em;
+  line-height: 1.6;
 }
 
-.reactor-steady {
+.mecha-roll .roll-extra .reactor-degrade .degrade-label {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.mecha-roll .roll-extra .reactor-degrade .degrade-dice {
+  display: block;
+  font-size: 1.1em;
+}
+
+.mecha-roll .roll-extra .reactor-steady {
   color: var(--mecha-green);
   font-weight: bold;
   display: block;
-  margin-top: 6px;
+  padding: 10px 12px;
+  background: rgba(34, 197, 94, 0.1);
+  border-radius: 6px;
+  border: 1px solid var(--mecha-green);
+  text-align: center;
+  font-size: 1em;
 }
 
-.reactor-overheat {
+.mecha-roll .roll-extra .reactor-overheat {
   color: #ff4444;
   font-weight: bold;
   display: block;
-  margin-top: 6px;
-  padding: 6px 8px;
+  padding: 10px 12px;
   background: rgba(255, 68, 68, 0.2);
-  border-radius: 4px;
-  border: 1px solid rgba(255, 68, 68, 0.4);
+  border-radius: 6px;
+  border: 2px solid #ff4444;
+  text-align: center;
+  font-size: 1.1em;
   animation: overheat-pulse 0.5s ease-in-out 3;
 }
 
@@ -1050,19 +1314,21 @@
   border-left-color: var(--mecha-green);
 }
 
-.mecha-roll.heal-roll strong {
+.mecha-roll.heal-roll .roll-header strong {
   color: var(--mecha-green);
 }
 
-.heal-result {
+.mecha-roll.heal-roll .roll-die.die-hit {
+  border-color: var(--mecha-green);
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.4);
+}
+
+.mecha-roll.heal-roll .roll-result.heal-result {
   color: var(--mecha-green);
   font-weight: bold;
-  display: block;
-  margin-top: 6px;
-  padding: 6px 8px;
+  font-size: 1.1em;
   background: rgba(34, 197, 94, 0.15);
-  border-radius: 4px;
-  border: 1px solid rgba(34, 197, 94, 0.3);
+  border: 1px solid var(--mecha-green);
 }
 
 /* Damage roll styling */
@@ -1412,14 +1678,13 @@ a.inline-roll:hover,
   text-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
 }
 
-/* Boss checkbox styling */
+/* Boss checkbox styling - positioned in stats row aligned with AP */
 .mecha-hack.enemy-sheet .boss-field {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-left: auto;
-  background: var(--mecha-accent);
-  padding: 6px 12px;
+  gap: 6px;
+  background: var(--mecha-bg);
+  padding: 6px 10px;
   border-radius: 4px;
   border: 1px solid var(--mecha-red);
 }
@@ -1427,7 +1692,7 @@ a.inline-roll:hover,
 .mecha-hack.enemy-sheet .boss-field label {
   font-weight: bold;
   color: var(--mecha-red);
-  font-size: 0.9em;
+  font-size: 0.85em;
   white-space: nowrap;
 }
 
@@ -1827,6 +2092,72 @@ a.inline-roll:hover,
 .mecha-hack.enemy-sheet .enemy-stat-field label .restore-ap:hover {
   color: #33ddff;
   text-shadow: 0 0 8px var(--mecha-cyan);
+}
+
+/* ============================================
+   BOSS SECTION COLLAPSIBLE
+   ============================================ */
+
+.mecha-hack.enemy-sheet .boss-section-wrapper {
+  margin-top: 16px;
+}
+
+.mecha-hack.enemy-sheet .boss-section-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--mecha-accent);
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--mecha-border);
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 0;
+}
+
+.mecha-hack.enemy-sheet .boss-section-toggle:hover {
+  background: var(--mecha-bg-light);
+  border-color: gold;
+}
+
+.mecha-hack.enemy-sheet .boss-section-toggle.active {
+  border-color: gold;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-bottom: 0;
+}
+
+.mecha-hack.enemy-sheet .boss-section-toggle .toggle-icon {
+  color: gold;
+  transition: transform 0.2s;
+}
+
+.mecha-hack.enemy-sheet .boss-section-toggle.active .toggle-icon {
+  transform: rotate(90deg);
+}
+
+.mecha-hack.enemy-sheet .boss-section-toggle .toggle-title {
+  flex: 1;
+  color: gold;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.mecha-hack.enemy-sheet .boss-section-toggle .toggle-title i {
+  margin-right: 8px;
+}
+
+.mecha-hack.enemy-sheet .boss-section-content {
+  display: none;
+  background: var(--mecha-bg);
+  border: 1px solid gold;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  padding: 12px;
+}
+
+.mecha-hack.enemy-sheet .boss-section-content.expanded {
+  display: block;
 }
 
 /* ============================================
